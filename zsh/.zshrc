@@ -16,5 +16,7 @@ alias n='nvim'
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
+
 eval "$(zoxide init --cmd cd bash)"
 eval "$(starship init zsh)"
