@@ -7,7 +7,7 @@ export SAVEHIST=10000
 alias ls='lsd'
 alias la='ls -a'
 alias lt='ls --tree'
-alias rm='trash'
+alias rm='trash-put'
 
 alias n='nvim'
 
