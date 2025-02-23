@@ -1,0 +1,39 @@
+/* Remove all title bar buttons */
+.titlebar-buttonbox-container {
+    display: none !important;
+}
+
+/* Permanently hide the Bookmarks Toolbar */
+#PersonalToolbar {
+    display: none !important;
+}
+
+/* Hide Back and Forward buttons */
+#back-button, #forward-button {
+    display: none !important;
+}
+
+/* Hide the Refresh (Reload) button */
+#reload-button {
+    display: none !important;
+}
+
+/* Hide the Extensions button */
+#unified-extensions-button {  
+    display: none !important;
+}
+
+/* Hide the Bookmark Star in the URL Bar */
+#star-button-box {
+    display: none !important;
+}
+
+/* Hide Shield (Tracking Protection) Icon */
+#tracking-protection-icon-container {
+    display: none !important;
+}
+
+/* Hide Lock (HTTPS) Icon */
+#identity-icon {
+    display: none !important;
+}
