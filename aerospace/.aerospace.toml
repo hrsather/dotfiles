@@ -25,3 +25,8 @@ start-at-login = true
     ctrl-shift-7 = 'move-node-to-workspace 7'
     ctrl-shift-8 = 'move-node-to-workspace 8'
     ctrl-shift-9 = 'move-node-to-workspace 9'
+
+    ctrl-h = 'focus left'
+    ctrl-j = 'focus down'
+    ctrl-k = 'focus up'
+    ctrl-l = 'focus right'
