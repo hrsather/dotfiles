@@ -1,3 +1,5 @@
+set -o emacs
+
 export EDITOR="nvim"
 export VISUAL="nvim"
 export HISTSIZE=10000
