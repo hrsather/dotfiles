@@ -5,12 +5,14 @@ export VISUAL="nvim"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
-alias ls='lsd'
-alias la='ls -a'
-alias lt='ls --tree'
-alias rm='trash-put'
-
-alias n='nvim'
+alias t="btop"
+alias n="nvim"
+alias lg="lazygit"
+alias ls="lsd"
+alias la="ls -a"
+alias lt="ls --tree"
+alias rm="trash-put"
+alias ds="find . -name '.DS_Store' -type f -delete"
 
 # fzf ctrl-r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
