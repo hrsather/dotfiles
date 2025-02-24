@@ -2,6 +2,8 @@ window-decoration = none
 background-blur = true
 background-opacity = 0.8
 
+font-family = "Hack Nerd Font Mono"
+
 theme = nord-wave
 
 keybind = cmd+a=text:\x01

@@ -11,6 +11,7 @@ cask "soundsource"
 cask "alfred"
 cask "miniconda"
 cask "dimentium/autoraise/autoraiseapp"
+cask "font-hack-nerd-font"
 
 brew "tmux"
 brew "neovim"
