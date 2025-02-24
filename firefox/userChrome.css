@@ -18,11 +18,6 @@
     display: none !important;
 }
 
-/* Hide the Extensions button */
-#unified-extensions-button {  
-    display: none !important;
-}
-
 /* Hide the Bookmark Star in the URL Bar */
 #star-button-box {
     display: none !important;
@@ -37,3 +32,9 @@
 #identity-icon {
     display: none !important;
 }
+
+/* Hide List all tabs button */
+#alltabs-button {
+    display: none !important;
+}
+

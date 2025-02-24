@@ -10,6 +10,7 @@ cask "chatgpt"
 cask "soundsource"
 cask "alfred"
 cask "miniconda"
+cask "dimentium/autoraise/autoraiseapp"
 
 brew "tmux"
 brew "neovim"
