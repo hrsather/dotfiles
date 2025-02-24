@@ -83,5 +83,5 @@ error_symbol = '[ ➜](bold red)'
 #style = "bg:#6272a4"
 
 [cmd_duration]
-min_time = 500
+min_time = 2000
 format = ' [$duration](#6272a4)'
