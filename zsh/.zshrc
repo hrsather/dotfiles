@@ -15,6 +15,7 @@ alias rm="trash-put"
 alias ds="find . -name '.DS_Store' -type f -delete"
 alias gp="git pull"
 alias gP="git push"
+alias y="yazi"
 
 # fzf ctrl-r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
