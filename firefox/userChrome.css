@@ -38,3 +38,18 @@
     display: none !important;
 }
 
+/* Hide the Reader View button in the address bar */
+#reader-mode-button {
+    display: none !important;
+}
+
+/* Auto-hide the navigation bar (URL bar) */
+#nav-bar {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#nav-bar:hover {
+    opacity: 1;
+}
+
