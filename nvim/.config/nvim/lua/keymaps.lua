@@ -15,6 +15,10 @@ vim.keymap.set("v", "C", '"_C', { noremap = true })
 vim.keymap.set("v", "D", '"_D', { noremap = true })
 vim.keymap.set({ "n", "v" }, "x", '"_x', { noremap = true })
 vim.keymap.set({ "n", "v" }, "X", '"_X', { noremap = true })
+vim.keymap.set("v", "p", '"0p', { noremap = true })
+vim.keymap.set("v", "P", '"0P', { noremap = true })
+vim.keymap.set("n", "p", '"0p', { noremap = true })
+vim.keymap.set("n", "P", '"0P', { noremap = true })
 -- Y to yank right
 vim.keymap.set("n", "Y", "y$", { noremap = true })
 -- Visual block
