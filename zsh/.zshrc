@@ -24,6 +24,7 @@ alias y="yazi"
 
 # fzf ctrl-r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_CTRL_R_OPTS="--reverse"
 
 # Remove dups
 export HISTSIZE=10000
@@ -36,6 +37,7 @@ setopt HIST_EXPIRE_DUPS_FIRST  # Remove older duplicates first
 setopt HIST_FIND_NO_DUPS  # Do not show duplicate results in history search
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
