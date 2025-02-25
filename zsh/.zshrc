@@ -21,6 +21,7 @@ alias ds="find . -name '.DS_Store' -type f -delete"
 alias gp="git pull"
 alias gP="git push"
 alias y="yazi"
+alias c="clear"
 
 # fzf ctrl-r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -37,7 +38,7 @@ setopt HIST_EXPIRE_DUPS_FIRST  # Remove older duplicates first
 setopt HIST_FIND_NO_DUPS  # Do not show duplicate results in history search
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
