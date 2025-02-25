@@ -2,8 +2,6 @@ set -o emacs
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export HISTSIZE=10000
-export SAVEHIST=10000
 
 alias t="btop"
 alias n="nvim"
@@ -20,7 +18,10 @@ alias y="yazi"
 # fzf ctrl-r
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-HISTCONTROL=ignoredups
+# Remove dups
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTCONTROL=ignoredups
 setopt HIST_IGNORE_DUPS   # Ignore duplicate commands
 setopt HIST_IGNORE_ALL_DUPS  # Remove ALL previous duplicates when saving
 setopt HIST_SAVE_NO_DUPS  # Do not save duplicate commands to history
@@ -33,3 +34,19 @@ export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
+
+# Docker
+# Ensure Colima's Docker context is used
+export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+if ! colima status &>/dev/null; then
+    colima start
+fi
+
+# Conda
+conda init zsh
+# Manually activate conda only when needed
+if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+    source "$HOME/miniconda3/etc/profile.d/conda.sh"
+fi
+conda config --set auto_activate_base false
+
