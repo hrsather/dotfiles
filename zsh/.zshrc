@@ -47,6 +47,16 @@ source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
 conda config --set auto_activate_base false
 
+export FZF_DEFAULT_OPTS="
+  --color=bg:-1,bg+:-1,hl:#88C0D0
+  --color=fg:#ECEFF4,fg+:#E5E9F0,hl+:#8FBCBB
+  --color=info:#81A1C1,prompt:#81A1C1,pointer:#88C0D0
+  --color=marker:#81A1C1,spinner:#88C0D0,header:#81A1C1
+  --color=selected-bg:#4C566A,selected-fg:#ECEFF4
+  --color=current-bg:#3B4252,current-fg:#ECEFF4
+  --highlight-line
+"
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
