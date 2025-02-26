@@ -23,9 +23,21 @@ alias gP="git push"
 alias y="yazi"
 alias c="clear"
 
-# fzf ctrl-r
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_CTRL_R_OPTS="--reverse"
+export FZF_DEFAULT_OPTS="
+  --color=bg:-1,bg+:-1,hl:#88C0D0
+  --color=fg:#ECEFF4,fg+:#E5E9F0,hl+:#8FBCBB
+  --color=info:#81A1C1,prompt:#81A1C1,pointer:#88C0D0
+  --color=marker:#81A1C1,spinner:#88C0D0,header:#81A1C1
+  --color=selected-bg:#4C566A,selected-fg:#ECEFF4
+  --color=current-bg:#3B4252,current-fg:#ECEFF4
+  --highlight-line
+"
+
+# micromamba
+micromamba shell init --shell=bash --no-auto-activate
 
 # Remove dups
 export HISTSIZE=10000
@@ -37,41 +49,16 @@ setopt HIST_SAVE_NO_DUPS  # Do not save duplicate commands to history
 setopt HIST_EXPIRE_DUPS_FIRST  # Remove older duplicates first
 setopt HIST_FIND_NO_DUPS  # Do not show duplicate results in history search
 
+# zsh plugins
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# trash-cli
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
+# zoxide
 eval "$(zoxide init --cmd cd zsh)"
+
+# powerlevel10k
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
-
-conda config --set auto_activate_base false
-
-export FZF_DEFAULT_OPTS="
-  --color=bg:-1,bg+:-1,hl:#88C0D0
-  --color=fg:#ECEFF4,fg+:#E5E9F0,hl+:#8FBCBB
-  --color=info:#81A1C1,prompt:#81A1C1,pointer:#88C0D0
-  --color=marker:#81A1C1,spinner:#88C0D0,header:#81A1C1
-  --color=selected-bg:#4C566A,selected-fg:#ECEFF4
-  --color=current-bg:#3B4252,current-fg:#ECEFF4
-  --highlight-line
-"
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
