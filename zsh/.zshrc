@@ -37,7 +37,6 @@ export FZF_DEFAULT_OPTS="
 "
 
 # micromamba
-micromamba shell init --shell=bash --no-auto-activate
 
 # Remove dups
 export HISTSIZE=10000
