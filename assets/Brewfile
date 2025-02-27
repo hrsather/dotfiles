@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "dimentium/autoraise"
 tap "nikitabobko/tap"
+tap "buo/cask-upgrade"
 
 cask "dimentium/autoraise/autoraiseapp"
 cask "nikitabobko/tap/aerospace"

@@ -36,7 +36,6 @@ export FZF_DEFAULT_OPTS="
   --highlight-line
 "
 
-# micromamba
 
 # Remove dups
 export HISTSIZE=10000

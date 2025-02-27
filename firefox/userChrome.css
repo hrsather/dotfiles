@@ -53,3 +53,16 @@
     opacity: 1;
 }
 
+
+#urlbar .urlbar-input-box {
+   text-align: center;
+}
+.urlbarView-row {
+    justify-content: center !important;
+}
+.urlbarView-row-inner {
+    max-width: max-content !important;
+}
+.urlbarView-no-wrap {
+    max-width: 100% !important;
+}
