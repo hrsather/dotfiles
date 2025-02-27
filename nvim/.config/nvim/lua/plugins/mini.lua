@@ -54,9 +54,6 @@ return {
 			end,
 		})
 
-		-- comment
-		require("mini.comment").setup()
-
 		-- highlight patterns
 		require("mini.hipatterns").setup({
 			highlighters = {

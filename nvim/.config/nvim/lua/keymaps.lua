@@ -5,8 +5,14 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- Ctrl-z doesn't suspend the shell anymore
 vim.keymap.set("n", "<C-z>", "<nop>", { noremap = true, silent = true })
--- Don't add pasting over to register
-vim.keymap.set("n", "c", '"_c', { noremap = true }) -- Works properly with motions
+-- Leader d for cut
+vim.keymap.set("n", "<leader>d", '"+dd', { noremap = true, desc = "Cut line" })
+vim.keymap.set("v", "<leader>d", '"+d', { noremap = true, desc = "Cut selection" })
+-- Don't pasting over copy register
+vim.keymap.set("n", "d", '"_d', { noremap = true })
+vim.keymap.set("n", "dd", '"_dd', { noremap = true })
+vim.keymap.set("v", "d", '"_d', { noremap = true })
+vim.keymap.set("n", "c", '"_c', { noremap = true })
 vim.keymap.set("n", "C", '"_C', { noremap = true })
 vim.keymap.set("v", "c", '"_c', { noremap = true })
 vim.keymap.set("v", "C", '"_C', { noremap = true })
@@ -15,15 +21,18 @@ vim.keymap.set({ "n", "v" }, "x", '"_x', { noremap = true })
 vim.keymap.set({ "n", "v" }, "X", '"_X', { noremap = true })
 vim.keymap.set("v", "p", '"_dP', { noremap = true })
 vim.keymap.set("v", "P", '"_dP', { noremap = true })
+-- Comment in normal mode
+vim.keymap.del("n", "gcc")
+local line_rhs = function()
+	return require("vim._comment").operator() .. "_"
+end
+vim.keymap.set("n", "gc", line_rhs, { expr = true, desc = "Toggle comment line" })
 -- Y to yank right
 vim.keymap.set("n", "Y", "y$", { noremap = true })
 -- Visual block
 vim.keymap.set("n", "<leader>v", "<C-v>", { noremap = true, desc = "Visual block" })
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>h", vim.diagnostic.open_float, { desc = "Show diagnostic error messages" })
--- Leader d for cut
-vim.keymap.set("n", "<leader>d", '"+dd', { noremap = true, desc = "Cut line" })
-vim.keymap.set("v", "<leader>d", '"+d', { noremap = true, desc = "Cut selection" })
 -- buffers
 vim.keymap.set("n", "<leader>b", "<cmd>e #<cr>", { noremap = true, desc = "Last Buffer" })
 vim.keymap.set("n", "<leader>q", "<cmd>wq<cr>", { noremap = true, desc = "Close Buffer" })
