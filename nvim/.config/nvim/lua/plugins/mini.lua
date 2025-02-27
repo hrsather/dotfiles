@@ -7,9 +7,6 @@ return {
 		--  - ci'  - [C]hange [I]nside [']quote
 		require("mini.ai").setup()
 
-		-- move
-		require("mini.move").setup()
-
 		-- surround
 		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
 		-- - sd'   - [S]urround [D]elete [']quotes
