@@ -1,27 +1,22 @@
 #!/bin/bash
 
-REPOS=("test" "test2")
+REPO_PATHS=("$HOME/dotfiles" "$HOME/Repos/callmates/site" "$HOME/Repos/callmates/backend" "$HOME/Repos/learning/learnml")
 
-BASE_DIR="$HOME/Repos"
 
-# Loop through each repository
-for REPO in "${REPOS[@]}"; do
-	SESSION_NAME="$REPO"
-	REPO_PATH="$BASE_DIR/$REPO"
+for REPO in "${REPO_PATHS[@]}"; do
+	SESSION_NAME=$(basename "$REPO")
 
-	# Check if repo directory exists
-	if [ ! -d "$REPO_PATH" ]; then
+	if [ ! -d "$REPO" ]; then
 		echo "Skipping $SESSION_NAME (directory does not exist)"
 		continue
 	fi
 
-	# Check if session already exists
 	if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
 		echo "Session $SESSION_NAME already exists, skipping..."
 		continue
 	fi
 
-	tmux new-session -d -s "$SESSION_NAME" -c "$REPO_PATH"
+	tmux new-session -d -s "$SESSION_NAME" -c "$REPO"
 	tmux rename-window -t "$SESSION_NAME:1" "Code"
 	tmux send-keys -t "$SESSION_NAME:1.1" "n" C-m
 
