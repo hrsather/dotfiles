@@ -9,7 +9,6 @@ cask "firefox"
 cask "ghostty"
 cask "spotify"
 cask "karabiner-elements"
-cask "microsoft-azure-storage-explorer"
 cask "chatgpt"
 cask "soundsource"
 cask "alfred"
@@ -40,3 +39,9 @@ brew "powerlevel10k"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "micromamba"
+
+# Work
+cask "microsoft-azure-storage-explorer"
+
+# Personal
+cask "proton-mail"
