@@ -54,6 +54,7 @@
 }
 
 
+/* Center the url bar */
 #urlbar .urlbar-input-box {
    text-align: center;
 }
@@ -66,3 +67,6 @@
 .urlbarView-no-wrap {
     max-width: 100% !important;
 }
+
+/* Hide url bar placeholder */
+#urlbar-input::placeholder{ color: transparent }
