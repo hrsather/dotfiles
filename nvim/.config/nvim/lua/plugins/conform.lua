@@ -13,5 +13,11 @@ return {
 			markdown = { "prettier" },
 			python = { "ruff_format" },
 		},
+		formatters = {
+			ruff_format = {
+				command = "ruff",
+				args = { "format", "--line-length", "120", "-" }, -- Ensures Ruff formats with a max line length of 120
+			},
+		},
 	},
 }

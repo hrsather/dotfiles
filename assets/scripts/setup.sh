@@ -15,3 +15,8 @@ defaults write -g InitialKeyRepeat -int 15
 # Mouse doesn't get larger
 defaults write ~/Library/Preferences/.GlobalPreferences CGDisableCursorLocationMagnification -bool true
 
+# Don't add a period on a double space
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# Save screenshots to downloads
+defaults write com.apple.screencapture location ~/Downloads

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_PATHS=("$HOME/dotfiles" "$HOME/Repos/callmates/site" "$HOME/Repos/callmates/backend" "$HOME/Repos/learning/learnml")
+REPO_PATHS=("$HOME/dotfiles" "$HOME/Repos/cv-workflow" "$HOME/Repos/label_studio/" "$HOME/Repos/labelstudio-metrics/" "$HOME/Repos/axon-teamcity/" "$HOME/Repos/als-infra")
 
 
 for REPO in "${REPO_PATHS[@]}"; do

@@ -39,9 +39,10 @@ brew "powerlevel10k"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "micromamba"
+brew "terraform"
+brew "gh"
 
-# Work
+brew "azcopy"
 cask "microsoft-azure-storage-explorer"
+brew "azure-cli"
 
-# Personal
-cask "proton-mail"

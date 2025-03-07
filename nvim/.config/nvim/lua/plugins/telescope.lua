@@ -49,7 +49,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>/", function()
 			builtin.live_grep({
 				additional_args = function()
-					return { "--hidden", "--glob", "!.git/*" }
+					return { "--hidden", "--fixed-strings", "--glob", "!.git/*" }
 				end,
 			})
 		end, { desc = "[S]earch by [G]rep" })
