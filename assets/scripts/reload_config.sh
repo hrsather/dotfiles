@@ -2,7 +2,7 @@
 
 DOTFILES_DIR="${HOME}/dotfiles"
 
-packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin")
+packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin" "git")
 
 for package in "${packages[@]}"; do
   stow --dir="$DOTFILES_DIR" "$package"

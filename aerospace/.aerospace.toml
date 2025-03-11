@@ -15,6 +15,7 @@ start-at-login = true
     ctrl-7 = 'workspace 7'
     ctrl-8 = 'workspace 8'
     ctrl-9 = 'workspace 9'
+    ctrl-v = 'workspace V'
 
     ctrl-shift-1 = 'move-node-to-workspace 1'
     ctrl-shift-2 = 'move-node-to-workspace 2'
@@ -25,6 +26,7 @@ start-at-login = true
     ctrl-shift-7 = 'move-node-to-workspace 7'
     ctrl-shift-8 = 'move-node-to-workspace 8'
     ctrl-shift-9 = 'move-node-to-workspace 9'
+    ctrl-shift-v = 'move-node-to-workspace v'
 
     ctrl-h = 'focus left'
     ctrl-j = 'focus down'
@@ -37,5 +39,44 @@ start-at-login = true
     inner.vertical   = 20
     outer.left       = 20
     outer.bottom     = 20
-    outer.top        = 20
+    outer.top        = [{ monitor.'built-in' = 0 }, 20]
     outer.right      = 20
+
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.Outlook'
+    run = ['move-node-to-workspace 2']
+[[on-window-detected]]
+    if.app-id = 'ch.protonmail.protonmailbridge'
+    run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+    if.app-id = 'com.spotify.client'
+    run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+    if.app-id = 'com.mitchellh.ghostty'
+    run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+    if.app-id = 'us.zoom.xos'
+    run = ['move-node-to-workspace 6']
+
+[[on-window-detected]]
+    if.app-id = 'org.mozilla.firefox'
+    run = ['move-node-to-workspace 7']
+
+[[on-window-detected]]
+    if.app-id = 'com.openai.chat'
+    run = ['move-node-to-workspace 8']
+
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.StorageExplorer'
+    run = ['move-node-to-workspace 9']
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.iCal'
+    run = ['move-node-to-workspace 0']

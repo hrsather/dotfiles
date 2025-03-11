@@ -5,6 +5,8 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- Ctrl-z doesn't suspend the shell anymore
 vim.keymap.set("n", "<C-z>", "<nop>", { noremap = true, silent = true })
+-- Slash search is literal
+vim.keymap.set("n", "/", "/\\V", { noremap = true })
 -- Leader d for cut
 vim.keymap.set("n", "<leader>d", '"+dd', { noremap = true, desc = "Cut line" })
 vim.keymap.set("v", "<leader>d", '"+d', { noremap = true, desc = "Cut selection" })

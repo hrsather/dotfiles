@@ -42,7 +42,12 @@ brew "micromamba"
 brew "terraform"
 brew "gh"
 
-brew "azcopy"
-cask "microsoft-azure-storage-explorer"
-brew "azure-cli"
+# Personal stuff
+#cask "proton-mail"
 
+# Work stuff
+cask "microsoft-azure-storage-explorer"
+cask "microsoft-teams"
+
+brew "azcopy"
+brew "azure-cli"
