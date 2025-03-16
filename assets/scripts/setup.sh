@@ -20,3 +20,10 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
 # Save screenshots to downloads
 defaults write com.apple.screencapture location ~/Downloads
+
+# Open home dir in finder by default
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+
+# Disable recent apps in dock
+defaults write com.apple.dock show-recents -bool false
