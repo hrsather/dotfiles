@@ -22,14 +22,19 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				mappings = {
 					i = {
 						["<Esc>"] = require("telescope.actions").close,
+						["<c-x>"] = "delete_buffer",
 					},
 				},
-				sorting_strategy = "ascending", -- Show results in ascending order (oldest at top)
+				sorting_strategy = "ascending",
 				layout_config = {
-					prompt_position = "top", -- Moves prompt to the top
+					prompt_position = "top",
 				},
 			},
-			-- pickers = {}
+			pickers = {
+				buffers = {
+					sort_lastused = true,
+				},
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
@@ -55,5 +60,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		end, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+		vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Telescope buffers" })
 	end,
 }
