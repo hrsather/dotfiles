@@ -7,6 +7,8 @@ fi
 
 set -o emacs
 
+setopt interactive_comments
+
 export EDITOR="nvim"
 export VISUAL="nvim"
 
