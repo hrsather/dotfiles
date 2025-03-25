@@ -10,7 +10,7 @@ vim.keymap.set("n", "/", "/\\V", { noremap = true })
 -- Leader d for cut
 vim.keymap.set("n", "<leader>d", '"+dd', { noremap = true, desc = "Cut line" })
 vim.keymap.set("v", "<leader>d", '"+d', { noremap = true, desc = "Cut selection" })
--- Don't pasting over copy register
+-- Don't paste over copy register
 vim.keymap.set("n", "d", '"_d', { noremap = true })
 vim.keymap.set("n", "dd", '"_dd', { noremap = true })
 vim.keymap.set("v", "d", '"_d', { noremap = true })

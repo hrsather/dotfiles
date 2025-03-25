@@ -27,3 +27,6 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Disable recent apps in dock
 defaults write com.apple.dock show-recents -bool false
+
+# Disable standard click to show desktop
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
