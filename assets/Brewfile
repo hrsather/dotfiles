@@ -43,11 +43,11 @@ brew "terraform"
 brew "gh"
 
 # Personal stuff
-#cask "proton-mail"
+cask "proton-mail"
+cask "aws-cdk"
 
 # Work stuff
-cask "microsoft-azure-storage-explorer"
-cask "microsoft-teams"
-
-brew "azcopy"
-brew "azure-cli"
+#cask "microsoft-azure-storage-explorer"
+#cask "microsoft-teams"
+#brew "azcopy"
+#brew "azure-cli"
