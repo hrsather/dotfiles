@@ -6,6 +6,7 @@ start-at-login = true
     alt-k = 'focus up'
     alt-l = 'focus right'
 
+    ctrl-0 = 'workspace 0'
     ctrl-1 = 'workspace 1'
     ctrl-2 = 'workspace 2'
     ctrl-3 = 'workspace 3'
@@ -15,8 +16,8 @@ start-at-login = true
     ctrl-7 = 'workspace 7'
     ctrl-8 = 'workspace 8'
     ctrl-9 = 'workspace 9'
-    ctrl-v = 'workspace V'
 
+    ctrl-shift-0 = 'move-node-to-workspace 0'
     ctrl-shift-1 = 'move-node-to-workspace 1'
     ctrl-shift-2 = 'move-node-to-workspace 2'
     ctrl-shift-3 = 'move-node-to-workspace 3'
@@ -26,7 +27,6 @@ start-at-login = true
     ctrl-shift-7 = 'move-node-to-workspace 7'
     ctrl-shift-8 = 'move-node-to-workspace 8'
     ctrl-shift-9 = 'move-node-to-workspace 9'
-    ctrl-shift-v = 'move-node-to-workspace v'
 
     ctrl-h = 'focus left'
     ctrl-j = 'focus down'

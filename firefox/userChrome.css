@@ -18,11 +18,6 @@
     display: none !important;
 }
 
-/* Hide the Bookmark Star in the URL Bar */
-#star-button-box {
-    display: none !important;
-}
-
 /* Hide Shield (Tracking Protection) Icon */
 #tracking-protection-icon-container {
     display: none !important;

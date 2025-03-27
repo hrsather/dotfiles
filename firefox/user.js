@@ -224,7 +224,6 @@ user_pref("browser.urlbar.suggest.openpage", false);
 // Disable suggestions from Pocket
 user_pref("browser.urlbar.suggest.pocket", false);
 
-// Keep only bookmarks & history in address bar suggestions
+// Keep only bookmarks in address bar suggestions
 user_pref("browser.urlbar.suggest.bookmark", true);
-user_pref("browser.urlbar.suggest.history", true);
 
