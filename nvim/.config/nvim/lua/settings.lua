@@ -17,5 +17,23 @@ vim.opt.scrolloff = 15
 vim.g.nord_disable_background = true
 -- Saving session options
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
--- Comments in interactive shell
---setopt interactive_comments
+-- highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+	end,
+})
+-- ignore warnings in :checkhealth
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+-- undo
+vim.opt.undofile = true
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+-- don't kick numbers right
+vim.o.signcolumn = "auto:3"
+-- numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.diagnostic.config({ signs = false })

@@ -2,22 +2,22 @@ return {
 	"echasnovski/mini.nvim",
 	config = function()
 		-- ai
-		--  - va)  - [V]isually select [A]round [)]paren
-		--  - yinq - [Y]ank [I]nside [N]ext [']quote
-		--  - ci'  - [C]hange [I]nside [']quote
 		require("mini.ai").setup()
 
 		-- surround
-		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-		-- - sd'   - [S]urround [D]elete [']quotes
-		-- - sr)'  - [S]urround [R]eplace [)] [']
 		require("mini.surround").setup()
 
 		-- sensible defaults
-		require("mini.basics").setup()
+		-- require("mini.basics").setup()
+
+		-- git signs
+		require("mini.diff").setup({ view = { style = "sign", signs = { add = "+", change = "~", delete = "-" } } })
 
 		-- indent
 		require("mini.indentscope").setup({ draw = { delay = 50 } })
+
+		-- pairs
+		require("mini.pairs").setup()
 
 		-- file explorer
 		require("mini.files").setup({

@@ -27,6 +27,7 @@ alias c="clear"
 alias cat="bat"
 alias conda="micromamba"
 alias ca="micromamba activate"
+alias tma="tmux attach"
 
 export BAT_THEME="Nord"
 
