@@ -18,6 +18,8 @@ return {
 
 		vim.o.laststatus = vim.g.lualine_laststatus
 
+		local noice = require("noice")
+
 		return {
 			options = {
 				theme = "auto",
@@ -30,8 +32,8 @@ return {
 				lualine_c = { "filename" },
 				lualine_x = {
 					{
-						require("noice").api.statusline.mode.get,
-						cond = require("noice").api.statusline.mode.has,
+						noice.api.statusline.mode.get,
+						cond = noice.api.statusline.mode.has,
 						color = { fg = "#ff9e64" },
 					},
 				},
@@ -40,7 +42,7 @@ return {
 				},
 				lualine_z = {
 					function()
-						return " " .. os.date("%R")
+						return os.date("%I:%M")
 					end,
 				},
 			},

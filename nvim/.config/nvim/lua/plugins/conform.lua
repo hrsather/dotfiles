@@ -16,7 +16,7 @@ return {
 		formatters = {
 			ruff_format = {
 				command = "ruff",
-				args = { "format", "--line-length", "120", "-" }, -- Ensures Ruff formats with a max line length of 120
+				args = { "format", "--line-length", "120", "-" },
 			},
 		},
 	},

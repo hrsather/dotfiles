@@ -5,7 +5,20 @@ return {
 		"MunifTanjim/nui.nvim",
 		"rcarriga/nvim-notify",
 	},
-	opts = function()
+	opts = function(_, opts)
+		-- Ensure opts is initialized
+		opts = opts or {}
+
+		-- Apply the notify setup
 		require("notify").setup({ background_colour = "#2E3440" })
+
+		-- Merge the lsp override configurations
+		opts.lsp = opts.lsp or {}
+		opts.lsp.override = vim.tbl_deep_extend("force", opts.lsp.override or {}, {
+			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+		})
+
+		return opts
 	end,
 }

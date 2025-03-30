@@ -35,3 +35,12 @@ keybind = cmd+w=text:\x17
 keybind = cmd+x=text:\x18
 keybind = cmd+y=text:\x19
 keybind = cmd+z=text:\x1A
+keybind = cmd+1=text:yh1
+keybind = cmd+2=text:yh2
+keybind = cmd+3=text:yh3
+keybind = cmd+4=text:yh4
+keybind = cmd+5=text:yh5
+keybind = cmd+6=text:yh6
+keybind = cmd+7=text:yh7
+keybind = cmd+8=text:yh8
+keybind = cmd+9=text:yh9

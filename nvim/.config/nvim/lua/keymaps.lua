@@ -1,5 +1,6 @@
 -- Clear search highlights and dismiss Noice
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><cmd>NoiceDismiss<CR>")
+
 -- Center cursor after moving page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -35,6 +36,7 @@ vim.keymap.set("n", "Y", "y$", { noremap = true })
 vim.keymap.set("n", "<leader>v", "<C-v>", { noremap = true, desc = "Visual block" })
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>h", vim.diagnostic.open_float, { desc = "Show diagnostic error messages" })
+vim.diagnostic.config({ virtual_text = true })
 -- buffers
 vim.keymap.set("n", "<leader>b", "<cmd>e #<cr>", { noremap = true, desc = "Last Buffer" })
 vim.keymap.set("n", "<leader>q", "<cmd>wq<cr>", { noremap = true, desc = "Close Buffer" })
@@ -44,6 +46,8 @@ vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<cr>", { noremap = true, desc = "L
 vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+-- lsp
+vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
 -- Joining
 vim.keymap.set("v", "<leader>j", "J", { desc = "Join" })
 vim.keymap.set("v", "J", "j", { desc = "Shift-J" })
@@ -68,3 +72,6 @@ vim.keymap.set(
 	"<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
 	{ noremap = true, desc = "Open root" }
 )
+-- save on ctrl-s
+vim.api.nvim_set_keymap("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
