@@ -7,9 +7,6 @@ return {
 		-- surround
 		require("mini.surround").setup()
 
-		-- sensible defaults
-		-- require("mini.basics").setup()
-
 		-- git signs
 		require("mini.diff").setup({ view = { style = "sign", signs = { add = "+", change = "~", delete = "-" } } })
 
