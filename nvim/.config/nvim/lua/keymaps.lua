@@ -72,6 +72,12 @@ vim.keymap.set(
 	"<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
 	{ noremap = true, desc = "Open root" }
 )
--- save on ctrl-s
-vim.api.nvim_set_keymap("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
+-- Save on Ctrl+S
+vim.keymap.set("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
+vim.keymap.set("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
+
+-- Tab to accept completion if menu is visible
+vim.keymap.set("i", "<Tab>", function()
+  return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
+end, { expr = true, noremap = true })
+

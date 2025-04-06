@@ -32,8 +32,11 @@ vim.g.loaded_ruby_provider = 0
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 -- don't kick numbers right
-vim.o.signcolumn = "auto:3"
+vim.o.signcolumn = "yes"
 -- numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.diagnostic.config({ signs = false })
+
+
+vim.o.completeopt = "menu,menuone,noselect"
