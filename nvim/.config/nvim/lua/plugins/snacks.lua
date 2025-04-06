@@ -22,29 +22,13 @@ return {
 			},
 		},
 		bigfile = {},
+		lazygit = {},
 	},
 	keys = {
-		{
-			"<leader><space>",
-			function()
-				Snacks.picker.smart()
-			end,
-			desc = "Smart Find Files",
-		},
-		{
-			"<leader>/",
-			function()
-				Snacks.picker.grep()
-			end,
-			desc = "Grep",
-		},
-		{
-			"gr",
-			function()
-				Snacks.picker.lsp_references()
-			end,
-			nowait = true,
-			desc = "References",
-		},
+		{ "<leader><space>", function() Snacks.picker.files() end,          desc = "Smart Find Files" },
+		{ "<leader>sr",      function() Snacks.picker.resume() end,         desc = "Resume" },
+		{ "<leader>/",       function() Snacks.picker.grep() end,           desc = "Grep" },
+		{ "gr",              function() Snacks.picker.lsp_references() end, nowait = true,            desc = "References" },
+		{ "<leader>g",       function() Snacks.lazygit() end,               nowait = true,            desc = "References" },
 	},
 }
