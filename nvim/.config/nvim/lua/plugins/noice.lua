@@ -26,6 +26,7 @@ return {
             {
                 filter = { event = "msg_showmode" },
                 view = "notify",
+                opts = { skip = true },
             },
             {
                 filter = {
