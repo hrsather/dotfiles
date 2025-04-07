@@ -27,17 +27,3 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     import = "plugins",
 })
-
--- Create a session file for each repo opened
-vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "*",
-    nested = true,
-    callback = function()
-        local session_file = vim.fn.getcwd() .. '/.Session.vim'
-        if vim.fn.filereadable(session_file) == 1 then
-            vim.cmd('source ' .. session_file)
-        else
-            vim.cmd('mksession! ' .. session_file)
-        end
-    end,
-})
