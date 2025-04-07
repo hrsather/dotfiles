@@ -6,11 +6,9 @@ return {
             sources = {
                 files = {
                     hidden = true,
-                    ignored = true,
                 },
                 grep = {
                     hidden = true,
-                    ignored = true,
                 },
             },
             win = {

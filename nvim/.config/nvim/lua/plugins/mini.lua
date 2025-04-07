@@ -13,13 +13,16 @@ return {
         -- indent
         require("mini.indentscope").setup({ draw = { delay = 50 } })
 
+        -- sessions
         require("mini.sessions").setup({ autoread = false, file = ".Session.vim" })
 
         -- pairs
         require("mini.pairs").setup()
 
+        -- tabline
         require("mini.tabline").setup()
 
+        -- statusline
         local my_active_content = function()
             local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
             local git           = MiniStatusline.section_git({ trunc_width = 40 })

@@ -28,7 +28,6 @@ require("lazy").setup({
     import = "plugins",
 })
 
-
 -- Create a session file for each repo opened
 vim.api.nvim_create_autocmd("VimEnter", {
     pattern = "*",
