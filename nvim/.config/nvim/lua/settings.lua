@@ -43,6 +43,6 @@ vim.o.completeopt = "menu,menuone,noselect"
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
--- smart / searching
+-- smart '/' searching
 vim.o.ignorecase = true
 vim.o.smartcase = true

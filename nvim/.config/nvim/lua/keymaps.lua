@@ -1,6 +1,5 @@
 -- Clear search highlights and dismiss Noice
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><cmd>NoiceDismiss<CR>")
-
 -- Center cursor after moving page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -26,10 +25,10 @@ vim.keymap.set("v", "p", '"_dP', { noremap = true })
 vim.keymap.set("v", "P", '"_dP', { noremap = true })
 -- Comment in normal mode
 vim.keymap.del("n", "gcc")
-local line_rhs = function()
+vim.keymap.set("n", "gc", function()
     return require("vim._comment").operator() .. "_"
 end
-vim.keymap.set("n", "gc", line_rhs, { expr = true, desc = "Toggle comment line" })
+, { expr = true, desc = "Toggle comment line" })
 -- Y to yank right
 vim.keymap.set("n", "Y", "y$", { noremap = true })
 -- Visual block
@@ -53,7 +52,6 @@ vim.keymap.set("v", "<leader>j", "J", { desc = "Join" })
 vim.keymap.set("v", "J", "j", { desc = "Shift-J" })
 vim.keymap.set("v", "K", "k", { desc = "Shift-K" })
 -- cloze Lazy with <esc>
-local user_grp = vim.api.nvim_create_augroup("LazyUserGroup", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "lazy",
     desc = "Quit lazy with <esc>",
@@ -62,7 +60,7 @@ vim.api.nvim_create_autocmd("FileType", {
             vim.api.nvim_win_close(0, false)
         end, { buffer = true, nowait = true })
     end,
-    group = user_grp,
+    group = vim.api.nvim_create_augroup("LazyUserGroup", { clear = true }),
 })
 -- mini files
 vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<CR>", { noremap = true, desc = "Open cwd" })
@@ -76,6 +74,6 @@ vim.keymap.set("i", "<Tab>", function()
     return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
 end, { expr = true, noremap = true })
 -- buffer movements
-vim.keymap.set("n", "db", ":bdelete<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-w>", ":bdelete<CR>", { silent = true, noremap = true, nowait = true })
 vim.keymap.set("n", "<c-h>", ":bprev<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-l>", ":bnext<CR>", { silent = true, noremap = true })
