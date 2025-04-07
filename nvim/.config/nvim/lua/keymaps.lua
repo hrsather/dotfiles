@@ -27,7 +27,7 @@ vim.keymap.set("v", "P", '"_dP', { noremap = true })
 -- Comment in normal mode
 vim.keymap.del("n", "gcc")
 local line_rhs = function()
-	return require("vim._comment").operator() .. "_"
+    return require("vim._comment").operator() .. "_"
 end
 vim.keymap.set("n", "gc", line_rhs, { expr = true, desc = "Toggle comment line" })
 -- Y to yank right
@@ -55,27 +55,27 @@ vim.keymap.set("v", "K", "k", { desc = "Shift-K" })
 -- cloze Lazy with <esc>
 local user_grp = vim.api.nvim_create_augroup("LazyUserGroup", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lazy",
-	desc = "Quit lazy with <esc>",
-	callback = function()
-		vim.keymap.set("n", "<esc>", function()
-			vim.api.nvim_win_close(0, false)
-		end, { buffer = true, nowait = true })
-	end,
-	group = user_grp,
+    pattern = "lazy",
+    desc = "Quit lazy with <esc>",
+    callback = function()
+        vim.keymap.set("n", "<esc>", function()
+            vim.api.nvim_win_close(0, false)
+        end, { buffer = true, nowait = true })
+    end,
+    group = user_grp,
 })
 -- mini files
 vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<CR>", { noremap = true, desc = "Open cwd" })
-vim.keymap.set(
-	"n",
-	"<leader>E",
-	"<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
-	{ noremap = true, desc = "Open root" }
-)
+vim.keymap.set("n", "<leader>E", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
+    { noremap = true, desc = "Open root" })
 -- Save on Ctrl+S
 vim.keymap.set("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
 vim.keymap.set("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
 -- Tab to accept completion if menu is visible
 vim.keymap.set("i", "<Tab>", function()
-	return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
+    return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
 end, { expr = true, noremap = true })
+-- buffer movements
+vim.keymap.set("n", "db", ":bdelete<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-h>", ":bprev<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-l>", ":bnext<CR>", { silent = true, noremap = true })
