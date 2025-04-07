@@ -4,6 +4,7 @@ require("lsp")
 
 vim.cmd.colorscheme("nord")
 
+-- Manually enable the lsp servers in the ./lsp/ directory
 vim.lsp.enable({ "basedpyright", "ruff", "lua", "json", "html", "css", "bash" })
 
 -- Bootstrap lazy.nvim
