@@ -2,10 +2,10 @@
 
 DOTFILES_DIR="${HOME}/dotfiles"
 
-packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin" "git")
+packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin" "git" "ruff")
 
 for package in "${packages[@]}"; do
-  stow --dir="$DOTFILES_DIR" "$package"
+	stow --dir="$DOTFILES_DIR" "$package"
 done
 
 # For Lazygit

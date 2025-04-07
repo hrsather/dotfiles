@@ -75,9 +75,7 @@ vim.keymap.set(
 -- Save on Ctrl+S
 vim.keymap.set("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
 vim.keymap.set("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
-
 -- Tab to accept completion if menu is visible
 vim.keymap.set("i", "<Tab>", function()
-  return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
+	return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
 end, { expr = true, noremap = true })
-

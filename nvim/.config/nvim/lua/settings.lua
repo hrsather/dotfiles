@@ -37,6 +37,5 @@ vim.o.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.diagnostic.config({ signs = false })
-
-
+-- better completion settings
 vim.o.completeopt = "menu,menuone,noselect"
