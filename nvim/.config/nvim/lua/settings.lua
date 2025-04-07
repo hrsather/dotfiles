@@ -19,10 +19,10 @@ vim.g.nord_disable_background = true
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
-	end,
+    group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
+    callback = function()
+        vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+    end,
 })
 -- ignore warnings in :checkhealth
 vim.g.loaded_node_provider = 0
@@ -39,7 +39,10 @@ vim.opt.relativenumber = true
 vim.diagnostic.config({ signs = false })
 -- better completion settings
 vim.o.completeopt = "menu,menuone,noselect"
-
+-- default spacing
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+-- smart / searching
+vim.o.ignorecase = true
+vim.o.smartcase = true
