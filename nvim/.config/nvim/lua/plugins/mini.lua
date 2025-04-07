@@ -13,6 +13,8 @@ return {
         -- indent
         require("mini.indentscope").setup({ draw = { delay = 50 } })
 
+        require("mini.sessions").setup({ autoread = false, file = ".Session.vim" })
+
         -- pairs
         require("mini.pairs").setup()
 
