@@ -19,6 +19,9 @@ return {
         -- pairs
         require("mini.pairs").setup()
 
+        -- jump
+        require("mini.jump").setup()
+
         -- tabline
         require("mini.tabline").setup()
 

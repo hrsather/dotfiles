@@ -49,9 +49,9 @@ brew "bash-language-server"
 brew "shfmt"
 
 # Personal stuff
-cask "proton-mail"
-cask "aws-cdk"
-cask "awscli"
+#brew "awscli"
+#cask "proton-mail"
+#cask "aws-cdk"
 
 # Work stuff
 #cask "microsoft-azure-storage-explorer"
