@@ -5,8 +5,7 @@ PROFILE_PATH="${PROFILES_PATH}${PROFILE}"
 
 mkdir -p "${PROFILE_PATH}/chrome"
 
-# Rebase repo
-cd "${HOME}/dotfiles/firefox/"
+cd "${HOME}/dotfiles/firefox/Betterfox"
 
 for file in ./*; do
     filename=$(basename "$file")
