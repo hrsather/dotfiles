@@ -42,6 +42,9 @@ mkdir -p "${HOME}/Library/Application Support/lazygit/"
 rm -f "${HOME}/Library/Application Support/lazygit/config.yml"
 ln -s "${HOME}/dotfiles/lazygit/.config/lazygit/config.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
 
+# Source tmux
+tmux source-file ~/.tmux.conf
+
 # Update submodules
 git submodule update --init --recursive
 git submodule update --remote --recursive
