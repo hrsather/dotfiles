@@ -18,4 +18,5 @@ nvim --headless +TSUpdateSync +qa
 bash "${HOME}/dotfiles/assets/scripts/update_firefox.sh"
 
 # Update submodules
+git submodule update --init --recursive
 git submodule update --remote --recursive
