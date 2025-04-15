@@ -214,7 +214,6 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 // visit https://github.com/yokoffing/Betterfox/wiki/Optional-Hardening
 // Enter your personal overrides below this line:
 
-
 // Disable top sites suggestions
 user_pref("browser.urlbar.suggest.topsites", false);
 
@@ -227,3 +226,6 @@ user_pref("browser.urlbar.suggest.pocket", false);
 // Keep only bookmarks in address bar suggestions
 user_pref("browser.urlbar.suggest.bookmark", true);
 
+//Disable animations
+user_pref("ui.prefersReducedMotion", 1);
+user_pref("browser.tabs.animate", false);

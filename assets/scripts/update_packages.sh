@@ -13,3 +13,9 @@ nvim --headless "+Lazy! sync" +qa
 
 # Update Treesitter langs
 nvim --headless +TSUpdateSync +qa
+
+# Update firefox
+bash "${HOME}/dotfiles/assets/scripts/update_firefox.sh"
+
+# Update submodules
+git submodule update --remote --recursive
