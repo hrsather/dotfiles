@@ -15,7 +15,7 @@ cask "alfred"
 cask "font-hack-nerd-font"
 cask "qview"
 cask "iina"
-cask "anaconda"
+cask "miniconda"
 
 brew "tmux"
 brew "fd"
