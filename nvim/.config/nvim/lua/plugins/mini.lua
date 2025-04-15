@@ -55,27 +55,29 @@ return {
                 synchronize = "<c-s>",
             },
         })
-        local map_split = function(buf_id, lhs, direction)
-            local rhs = function()
-                -- Make new window and set it as target
-                local new_target_window
-                vim.api.nvim_win_call(MiniFiles.get_target_window(), function()
-                    vim.cmd(direction .. " split")
-                    new_target_window = vim.api.nvim_get_current_win()
-                end)
-
-                MiniFiles.set_target_window(new_target_window)
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<cr>", true, true, true), "m", true)
-            end
-            local desc = "Split " .. direction
-            vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
-        end
         vim.api.nvim_create_autocmd("User", {
             pattern = "MiniFilesBufferCreate",
             callback = function(args)
                 local buf_id = args.data.buf_id
-                map_split(buf_id, "<space>-", "belowright horizontal")
-                map_split(buf_id, "<space>|", "belowright vertical")
+                local MiniFiles = require("mini.files")
+
+                local map_split = function(lhs, direction)
+                    vim.keymap.set("n", lhs, function()
+                        -- Create a new split and set it as the target window
+                        local new_target_window
+                        vim.api.nvim_win_call(vim.api.nvim_get_current_win(), function()
+                            vim.cmd(direction .. " split")
+                            new_target_window = vim.api.nvim_get_current_win()
+                        end)
+
+                        MiniFiles.set_target_window(new_target_window)
+                        MiniFiles.go_in()
+                        MiniFiles.close()
+                    end, { buffer = buf_id, desc = "Open in " .. direction .. " split" })
+                end
+
+                map_split("<space>-", "belowright horizontal")
+                map_split("<space>|", "belowright vertical")
             end,
         })
 

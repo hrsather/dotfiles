@@ -42,8 +42,8 @@ vim.keymap.set("n", "<leader>q", "<cmd>wq<cr>", { noremap = true, desc = "Close 
 vim.keymap.set("n", "<leader>Q", "<cmd>wqa<cr>", { noremap = true, desc = "Close All Buffers" })
 -- shortcuts
 vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<cr>", { noremap = true, desc = "LazyGit" })
-vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
-vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+vim.keymap.set("n", "<leader>-", ":split<cr>", { desc = "Split Window Below", remap = true })
+vim.keymap.set("n", "<leader>|", ":vsplit<cr>", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- lsp
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
