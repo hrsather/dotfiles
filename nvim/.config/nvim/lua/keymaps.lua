@@ -75,5 +75,8 @@ vim.keymap.set("i", "<Tab>", function()
 end, { expr = true, noremap = true })
 -- buffer movements
 vim.keymap.set("n", "<c-w>", ":bdelete<CR>", { silent = true, noremap = true, nowait = true })
-vim.keymap.set("n", "<c-h>", ":bprev<CR>", { silent = true, noremap = true })
-vim.keymap.set("n", "<c-l>", ":bnext<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "tl", ":bprev<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "tr", ":bnext<CR>", { silent = true, noremap = true })
+-- split movements
+vim.keymap.set('n', '<C-h>', '<Cmd>wincmd h<CR>', { desc = 'Move to left split' })
+vim.keymap.set('n', '<C-l>', '<Cmd>wincmd l<CR>', { desc = 'Move to right split' })
