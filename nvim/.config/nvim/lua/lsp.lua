@@ -16,6 +16,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Enable autocompletion if supported
         if client and client:supports_method('textDocument/completion') then
+            -- Set trigger characters to all printable ASCII characters
+            client.server_capabilities.completionProvider.triggerCharacters = {}
+            for i = 32, 126 do
+                table.insert(client.server_capabilities.completionProvider.triggerCharacters, string.char(i))
+            end
+
+            -- Autocommand to trigger completion on every insert-mode text change
+            vim.api.nvim_create_autocmd('TextChangedI', {
+                buffer = buf,
+                callback = function()
+                    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+                    local line = vim.api.nvim_get_current_line()
+                    local char = line:sub(col, col)
+                    if char:match("%s") then
+                        return
+                    end
+                    vim.lsp.completion.get()
+                end,
+            })
+
             vim.lsp.completion.enable(true, client.id, buf, { autotrigger = true })
         end
 
