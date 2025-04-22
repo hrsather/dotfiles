@@ -23,6 +23,7 @@ return {
         },
         bigfile = {},
         lazygit = {},
+        indent = {},
     },
     keys = {
         { "<leader><space>", function() Snacks.picker.files() end,          desc = "Smart Find Files" },

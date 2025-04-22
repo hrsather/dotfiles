@@ -10,9 +10,6 @@ return {
         -- git signs
         require("mini.diff").setup({ view = { style = "sign", signs = { add = "+", change = "~", delete = "-" } } })
 
-        -- indent
-        require("mini.indentscope").setup({ draw = { delay = 50 } })
-
         -- sessions
         require("mini.sessions").setup({ autoread = false, file = ".Session.vim" })
 
