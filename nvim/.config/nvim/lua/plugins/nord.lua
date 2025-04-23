@@ -1,7 +1,7 @@
 return {
     "EdenEast/nightfox.nvim",
     lazy = false,
-    priority = 1000,
+    priority = 1001,
     config = function()
         require("nightfox").setup({
             options = {

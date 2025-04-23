@@ -1,6 +1,6 @@
 return {
     "folke/snacks.nvim",
-    priority = 999,
+    priority = 1000,
     lazy = false,
     ---@type snacks.Config
     opts = {
@@ -24,6 +24,7 @@ return {
         bigfile = {},
         lazygit = {},
         indent = {},
+        quickfile = {},
     },
     keys = {
         { "<leader><space>", function() Snacks.picker.files() end,          desc = "Smart Find Files" },

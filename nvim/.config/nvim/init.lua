@@ -25,7 +25,3 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     import = "plugins",
 })
-
-
--- require('nightfox').setup({ options = { transparent = true } })
--- vim.cmd.colorscheme("nordfox")
