@@ -26,9 +26,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.api.nvim_create_autocmd('TextChangedI', {
                 buffer = buf,
                 callback = function()
-                    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+                    local _, col = unpack(vim.api.nvim_win_get_cursor(0))
                     local line = vim.api.nvim_get_current_line()
                     local char = line:sub(col, col)
+                    -- don't complete on whitespace
                     if char:match("%s") then
                         return
                     end

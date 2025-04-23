@@ -3,6 +3,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><cmd>NoiceDismiss<CR>")
 -- Center cursor after moving page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "G", "Gzz")
 -- Ctrl-z doesn't suspend shell
 vim.keymap.set("n", "<C-z>", "<nop>", { noremap = true, silent = true })
 -- Leader d for cut
