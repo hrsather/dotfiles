@@ -8,7 +8,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Keymaps
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
+        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
+        -- Tab to accept completion if menu is visible
+        vim.keymap.set("i", "<Tab>", function()
+            return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
+        end, { expr = true, noremap = true })
         -- Go to implementation if supported
         if client:supports_method('textDocument/implementation') then
             vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)

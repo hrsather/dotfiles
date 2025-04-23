@@ -44,8 +44,6 @@ vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<cr>", { noremap = true, desc = "L
 vim.keymap.set("n", "<leader>-", ":split<cr>", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>|", ":vsplit<cr>", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
--- lsp
-vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
 -- Joining
 vim.keymap.set("v", "<leader>j", "J", { desc = "Join" })
 vim.keymap.set("v", "J", "j", { desc = "Shift-J is j in v mode" })
@@ -61,17 +59,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
     group = vim.api.nvim_create_augroup("LazyUserGroup", { clear = true }),
 })
--- mini files
-vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<CR>", { noremap = true, desc = "Open cwd" })
-vim.keymap.set("n", "<leader>E", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
-    { noremap = true, desc = "Open root" })
 -- Save on Ctrl+S
 vim.keymap.set("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
 vim.keymap.set("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
--- Tab to accept completion if menu is visible
-vim.keymap.set("i", "<Tab>", function()
-    return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
-end, { expr = true, noremap = true })
 -- buffer movements
 vim.keymap.set("n", "<c-w>", ":bdelete<CR>", { silent = true, noremap = true, nowait = true })
 vim.keymap.set("n", "tl", ":bprev<CR>", { silent = true, noremap = true })
