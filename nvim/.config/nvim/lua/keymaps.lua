@@ -3,10 +3,8 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><cmd>NoiceDismiss<CR>")
 -- Center cursor after moving page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- Ctrl-z doesn't suspend the shell anymore
+-- Ctrl-z doesn't suspend shell
 vim.keymap.set("n", "<C-z>", "<nop>", { noremap = true, silent = true })
--- Slash search is literal
-vim.keymap.set("n", "/", "/\\V", { noremap = true })
 -- Leader d for cut
 vim.keymap.set("n", "<leader>d", '"+dd', { noremap = true, desc = "Cut line" })
 vim.keymap.set("v", "<leader>d", '"+d', { noremap = true, desc = "Cut selection" })
@@ -49,8 +47,8 @@ vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
 -- Joining
 vim.keymap.set("v", "<leader>j", "J", { desc = "Join" })
-vim.keymap.set("v", "J", "j", { desc = "Shift-J" })
-vim.keymap.set("v", "K", "k", { desc = "Shift-K" })
+vim.keymap.set("v", "J", "j", { desc = "Shift-J is j in v mode" })
+vim.keymap.set("v", "K", "k", { desc = "Shift-K is k in v mode" })
 -- cloze Lazy with <esc>
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "lazy",

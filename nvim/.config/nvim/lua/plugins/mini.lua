@@ -6,6 +6,13 @@ return {
 
         -- surround
         require("mini.surround").setup()
+        local surround_keys = { '"', 'b', 'q', '(', '[', '{' }
+
+        for _, key in ipairs(surround_keys) do
+            vim.keymap.set("v", key, function()
+                vim.api.nvim_feedkeys("sa" .. key, "x", false)
+            end, { noremap = true, silent = true })
+        end
 
         -- git signs
         require("mini.diff").setup({ view = { style = "sign", signs = { add = "+", change = "~", delete = "-" } } })
