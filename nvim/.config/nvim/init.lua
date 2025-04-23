@@ -2,8 +2,6 @@ require("settings")
 require("keymaps")
 require("lsp")
 
-vim.cmd.colorscheme("nord")
-
 -- Manually enable the lsp servers in the ./lsp/ directory
 vim.lsp.enable({ "basedpyright", "ruff", "lua", "json", "html", "css", "bash" })
 
@@ -27,3 +25,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     import = "plugins",
 })
+
+
+-- require('nightfox').setup({ options = { transparent = true } })
+-- vim.cmd.colorscheme("nordfox")
