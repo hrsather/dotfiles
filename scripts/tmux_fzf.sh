@@ -4,7 +4,7 @@
 sessions=$(tmux list-sessions -F "#S" 2>/dev/null)
 
 # Use fzf to select or enter a new session name
-fzf_output=$(echo "$sessions" | fzf --print-query --border --reverse --no-preview)
+fzf_output=$(echo "$sessions" | fzf --print-query --border --reverse --no-preview --bind 'ctrl-d:execute(tmux kill-session -t {+} > /dev/null 2>&1)')
 
 query=$(echo "$fzf_output" | sed -n '1p')
 match=$(echo "$fzf_output" | sed -n '2p')

@@ -27,6 +27,7 @@ alias y="yazi"
 alias c="clear"
 alias cat="bat"
 alias ca="conda activate"
+alias cc="bash ~/dotfiles/scripts/conda_fzf.sh"
 alias tma="tmux attach"
 
 export BAT_THEME="Nord"
