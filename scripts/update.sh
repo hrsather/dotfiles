@@ -5,11 +5,6 @@ if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# Install TPM if missing
-if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
 # Install FZF shell integrations (bindings + completions) if missing
 if ! command -v fzf &>/dev/null; then
     yes | "$(brew --prefix)/opt/fzf/install" --key-bindings --completion --no-update-rc
