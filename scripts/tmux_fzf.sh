@@ -15,7 +15,6 @@ if [[ -n "$match" ]]; then
 else
     selected_session="$query"
 fi
-echo $selected_session
 
 # If no session selected, exit
 if [[ -z "$selected_session" ]]; then
@@ -24,7 +23,9 @@ fi
 
 # Check if session exists
 if ! echo "$sessions" | grep -qx "$selected_session"; then
-    tmux new-session -d -s "$selected_session"
+    tmux new-session -d -s "$selected_session" -c "$selected_session"
+    tmux send-keys -t "$selected_session":1 "cd $selected_session" C-m
+    tmux send-keys -t "$selected_session":1 "clear" C-m
 fi
 
 # Attach to the session
