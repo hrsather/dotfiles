@@ -29,6 +29,7 @@ alias cat="bat"
 alias ca="conda activate"
 alias cc="bash ~/dotfiles/scripts/conda_fzf.sh"
 alias tma="tmux attach"
+alias nt="tmux rename-window -t 1 Code && tmux new-window -n Shell && tmux select-window -t Code && n"
 
 export BAT_THEME="Nord"
 
