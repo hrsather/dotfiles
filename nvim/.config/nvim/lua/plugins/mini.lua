@@ -6,11 +6,11 @@ return {
 
         -- surround
         require("mini.surround").setup()
-        local surround_keys = { '"', 'b', 'q', '(', '[', '{' }
+        local surround_keys = { '"', "'", 'q', '(', '[', '{' }
 
         for _, key in ipairs(surround_keys) do
             vim.keymap.set("v", key, function()
-                vim.api.nvim_feedkeys("sa" .. key, "x", false)
+                vim.api.nvim_feedkeys("sa" .. key, "x", true)
             end, { noremap = true, silent = true })
         end
 
