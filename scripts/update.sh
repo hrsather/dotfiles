@@ -75,7 +75,7 @@ defaults write NSGlobalDomain _HIHideMenuBar -bool true
 defaults write "Apple Global Domain" "AppleInterfaceStyle" "Dark"
 # Key repeats
 defaults write -g KeyRepeat -int 2
-defaults write -g InitialKeyRepeat -int 10
+defaults write -g InitialKeyRepeat -int 12
 # Mouse doesn't get larger
 defaults write ~/Library/Preferences/.GlobalPreferences CGDisableCursorLocationMagnification -bool true
 # Don't add a period on a double space
