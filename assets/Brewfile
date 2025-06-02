@@ -47,11 +47,13 @@ brew "diff-so-fancy"
 brew "vscode-langservers-extracted"
 brew "bash-language-server"
 brew "shfmt"
+brew "watch"
 
 # Personal stuff
-#brew "awscli"
-#cask "proton-mail"
-#cask "aws-cdk"
+# brew "awscli"
+# cask "proton-mail"
+# brew "aws-cdk"
+# brew "kubectl"
 
 # Work stuff
 cask "microsoft-azure-storage-explorer"
