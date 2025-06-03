@@ -25,12 +25,14 @@ return {
         lazygit = {},
         indent = {},
         quickfile = {},
+        gitbrowse = { what = "file", line_end = nil, line_start = nil },
     },
     keys = {
         { "<leader><space>", function() Snacks.picker.files() end,          desc = "Smart Find Files" },
         { "<leader>sr",      function() Snacks.picker.resume() end,         desc = "Resume" },
         { "<leader>/",       function() Snacks.picker.grep() end,           desc = "Grep" },
         { "gr",              function() Snacks.picker.lsp_references() end, nowait = true,            desc = "References" },
-        { "<leader>g",       function() Snacks.lazygit() end,               nowait = true,            desc = "References" },
+        { "<leader>g",       function() Snacks.lazygit() end,               desc = "LazyGit" },
+        { "gb",              function() Snacks.gitbrowse() end,             desc = "GitBrowse" },
     },
 }
