@@ -48,6 +48,7 @@ brew "vscode-langservers-extracted"
 brew "bash-language-server"
 brew "shfmt"
 brew "watch"
+brew "pre-commit"
 
 # Personal stuff
 # brew "awscli"
