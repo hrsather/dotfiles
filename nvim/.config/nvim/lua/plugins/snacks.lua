@@ -26,6 +26,7 @@ return {
         indent = {},
         quickfile = {},
         gitbrowse = { what = "file", line_end = nil, line_start = nil },
+        image = {}
     },
     keys = {
         { "<leader><space>", function() Snacks.picker.files() end,          desc = "Smart Find Files" },

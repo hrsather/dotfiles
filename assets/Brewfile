@@ -49,6 +49,7 @@ brew "bash-language-server"
 brew "shfmt"
 brew "watch"
 brew "pre-commit"
+brew "imagemagick"
 
 # Personal stuff
 # brew "awscli"
