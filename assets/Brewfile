@@ -50,6 +50,7 @@ brew "shfmt"
 brew "watch"
 brew "pre-commit"
 brew "imagemagick"
+brew "ffmpeg"
 
 # Personal stuff
 # brew "awscli"
