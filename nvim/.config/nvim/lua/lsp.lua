@@ -9,17 +9,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
+
         -- Tab to accept completion if menu is visible
         vim.keymap.set("i", "<Tab>", function()
-            return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
+            return vim.fn.pumvisible() == 1 and "<Tab>"
         end, { expr = true, noremap = true })
-        -- Go to implementation if supported
-        if client:supports_method('textDocument/implementation') then
-            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        end
 
         -- Enable autocompletion if supported
-        if client and client:supports_method('textDocument/completion') then
+        if client:supports_method('textDocument/completion') then
             -- Set trigger characters to all printable ASCII characters
             client.server_capabilities.completionProvider.triggerCharacters = {}
             for i = 32, 126 do

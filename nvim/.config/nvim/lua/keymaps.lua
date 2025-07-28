@@ -4,6 +4,12 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><cmd>NoiceDismiss<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "G", "Gzz")
+vim.keymap.set("n", "j", function()
+    return vim.v.count > 0 and "jzz" or "j"
+end, { expr = true, noremap = true })
+vim.keymap.set("n", "k", function()
+    return vim.v.count > 0 and "kzz" or "k"
+end, { expr = true, noremap = true })
 -- Ctrl-z doesn't suspend shell
 vim.keymap.set("n", "<C-z>", "<nop>", { noremap = true, silent = true })
 -- Leader d for cut
