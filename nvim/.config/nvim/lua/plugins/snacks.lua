@@ -25,7 +25,23 @@ return {
         lazygit = {},
         indent = {},
         quickfile = {},
-        gitbrowse = { what = "file", line_end = nil, line_start = nil },
+        gitbrowse = {
+            what = "file",
+            url_patterns = {
+                ["github%.com"] = {
+                    file = "/blob/{branch}/{file}",
+                },
+                ["gitlab%.com"] = {
+                    file = "/-/blob/{branch}/{file}",
+                },
+                ["bitbucket%.org"] = {
+                    file = "/src/{branch}/{file}",
+                },
+                ["git.sr.ht"] = {
+                    file = "/tree/{branch}/item/{file}",
+                },
+            },
+        },
         image = {}
     },
     keys = {
