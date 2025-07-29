@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Tab to accept completion if menu is visible
         vim.keymap.set("i", "<Tab>", function()
-            return vim.fn.pumvisible() == 1 and "<Tab>"
+            return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
         end, { expr = true, noremap = true })
 
         -- Enable autocompletion if supported
