@@ -37,6 +37,9 @@ mkdir -p "${HOME}/Library/Application Support/lazygit/"
 rm -f "${HOME}/Library/Application Support/lazygit/config.yml"
 ln -s "${HOME}/dotfiles/lazygit/.config/lazygit/config.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
 
+# Update other software
+sudo softwareupdate -i -a
+
 # Source tmux
 tmux source-file ~/.tmux.conf
 
