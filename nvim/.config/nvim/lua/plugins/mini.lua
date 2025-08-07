@@ -22,6 +22,9 @@ return {
         -- tabline
         require("mini.tabline").setup()
 
+        -- icons
+        require("mini.icons").setup()
+
         -- statusline
         local my_active_content = function()
             local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
