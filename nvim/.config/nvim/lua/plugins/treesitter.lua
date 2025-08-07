@@ -4,7 +4,7 @@ return {
         build = ":TSUpdate",
         main = 'nvim-treesitter.configs',
         opts = {
-            ensure_installed = { 'python', 'yaml', 'json', 'bash', 'html', 'lua', 'markdown', 'markdown_inline' },
+            ensure_installed = { 'python', 'yaml', 'json', 'bash', 'html', 'lua', 'markdown', 'markdown_inline', 'Dockerfile' },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {
