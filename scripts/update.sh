@@ -19,6 +19,9 @@ brew cu --all --force
 brew autoremove
 brew cleanup
 
+# Create dir for conda envs so they don't get overwritten on update
+conda config --add envs_dirs $HOME/.conda/envs
+
 # Update nvim packages
 nvim --headless "+Lazy! sync" +qa
 
