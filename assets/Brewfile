@@ -51,6 +51,7 @@ brew "watch"
 brew "pre-commit"
 brew "imagemagick"
 brew "ffmpeg"
+brew "black"
 
 # Personal stuff
 # brew "awscli"
