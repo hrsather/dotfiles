@@ -20,6 +20,11 @@ return {
                     },
                 },
             },
+            exclude = {
+                ".git",
+                "node_modules",
+                "poetry.lock",
+            }
         },
         bigfile = {},
         lazygit = {},
