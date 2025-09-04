@@ -69,9 +69,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.keymap.set("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
 vim.keymap.set("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
 -- buffer movements
-vim.keymap.set("n", "<c-w>", ":bdelete<CR>", { silent = true, noremap = true, nowait = true })
 vim.keymap.set("n", "zl", ":bprev<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "zr", ":bnext<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<C-w>", function() Snacks.bufdelete.delete() end,
+    { desc = "Delete buffer", nowait = true })
 -- split movements
 vim.keymap.set('n', '<C-h>', '<Cmd>wincmd h<CR>', { desc = 'Move to left split' })
 vim.keymap.set('n', '<C-l>', '<Cmd>wincmd l<CR>', { desc = 'Move to right split' })

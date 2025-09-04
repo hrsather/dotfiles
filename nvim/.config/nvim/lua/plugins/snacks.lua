@@ -30,6 +30,7 @@ return {
         lazygit = {},
         indent = {},
         quickfile = {},
+        buffdelete = {},
         gitbrowse = {
             what = "file",
             url_patterns = {
@@ -53,7 +54,7 @@ return {
         { "<leader><space>", function() Snacks.picker.files() end,          desc = "Smart Find Files" },
         { "<leader>sr",      function() Snacks.picker.resume() end,         desc = "Resume" },
         { "<leader>/",       function() Snacks.picker.grep() end,           desc = "Grep" },
-        { "gr",              function() Snacks.picker.lsp_references() end, nowait = true,            desc = "References" },
+        { "gr",              function() Snacks.picker.lsp_references() end, desc = "References" },
         { "<leader>g",       function() Snacks.lazygit() end,               desc = "LazyGit" },
         { "gb",              function() Snacks.gitbrowse() end,             desc = "GitBrowse" },
     },
