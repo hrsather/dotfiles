@@ -16,6 +16,7 @@ vim.api.nvim_set_hl(0, "MiniFilesTitleFocused", { fg = colors.success, bg = "NON
 vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { fg = colors.success, bg = "NONE", bold = false })
 vim.api.nvim_set_hl(0, "NoiceCmdlineIconSearch", { fg = colors.success, bg = "NONE", bold = false })
 vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = colors.success, bg = "NONE", bold = false })
+vim.api.nvim_set_hl(0, "ErrorMsg", { fg = colors.error, bg = "NONE", bold = false })
 
 -- Sign column
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
