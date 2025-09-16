@@ -13,6 +13,9 @@ vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" })
 vim.api.nvim_set_hl(0, "PmenuKind", { bg = "NONE" })
 vim.api.nvim_set_hl(0, "MiniFilesTitle", { fg = colors.success, bg = "NONE", bold = false })
 vim.api.nvim_set_hl(0, "MiniFilesTitleFocused", { fg = colors.success, bg = "NONE", bold = false })
+vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { fg = colors.success, bg = "NONE", bold = false })
+vim.api.nvim_set_hl(0, "NoiceCmdlineIconSearch", { fg = colors.success, bg = "NONE", bold = false })
+vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = colors.success, bg = "NONE", bold = false })
 
 -- Sign column
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
