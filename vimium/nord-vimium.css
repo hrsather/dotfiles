@@ -1,128 +1,166 @@
-/* Nord Vomnibar CSS */
-/* https://gist.github.com/mikowl/0ca291e4a1046b429f79700592c52814 */
+:root {
 
-#vomnibar ol, #vomnibar ul {
-  list-style: none;
-  display: none;
+    .vimium-reset,
+    #vomnibar,
+    #hud-container {
+        /** Nord Frost Palette */
+        --accent: #88C0D0;
+        /* Frost blue (main accent) */
+        --text: #2E3440;
+        /* Polar Night dark for contrast */
+        --background: #88C0D0;
+        /* Frost blue background */
+
+        /** Calculated Palette */
+        --text-secondary: color-mix(in srgb, var(--text) 70%, transparent);
+        --text-tertiary: color-mix(in srgb, var(--text) 50%, transparent);
+        --background-selected: #81A1C1;
+        /* Deeper frost blue */
+        --border-primary: #5E81AC;
+        /* Darker frost border */
+        --box-shadow: 0 1px 3px rgba(46, 52, 64, 0.25),
+            0 1px 2px rgba(46, 52, 64, 0.4);
+    }
+}
+
+@keyframes show {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#vimium-hint-marker-container {
+    .internal-vimium-hint-marker {
+        padding: 3px 4px;
+        background: var(--background);
+        border: 1px solid var(--border-primary);
+        box-shadow: var(--box-shadow);
+    }
+
+    span {
+        color: var(--text);
+        text-shadow: none;
+    }
+
+    .matchingCharacter {
+        opacity: 0.4;
+
+        ~span {
+            color: var(--accent);
+        }
+    }
 }
 
 #vomnibar {
-  background: rgba(46, 52, 68, 0.9);
-  color: #E5E9F0;
-  border-radius: 4px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-  border: none;
+    background: var(--background);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--box-shadow);
+    animation: show 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+
+    #vomnibar-search-area {
+        padding: 10px 30px;
+        color: var(--text);
+        background: transparent;
+        border: none;
+
+        input {
+            padding: 0;
+            color: var(--text);
+            background: transparent;
+            box-shadow: none;
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        border-top: 1px solid var(--border-primary);
+    }
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid var(--border-primary);
+
+        .top-half,
+        .bottom-half {
+            display: flex;
+            padding: 3px 0;
+        }
+
+        .title,
+        .source {
+            color: var(--text-secondary);
+        }
+
+        .url {
+            overflow: hidden;
+            color: var(--text-tertiary);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .match {
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        .title .match {
+            color: var(--text);
+        }
+
+        &.selected {
+            background-color: var(--background-selected);
+            border-bottom: 1px solid transparent;
+        }
+    }
 }
 
-#vomnibar input {
-  color: #E5E9F0;
-  font-size: 24px;
-  height: auto;
-  margin-bottom: 0;
-  padding: 15px;
-  background-color: unset;
-  border-radius: 3px;
-  border: none;
-  box-shadow: none;
-}
+#hud-container {
+    background: var(--background);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--box-shadow);
 
-#vomnibar .vomnibarSearchArea {
-  padding: 0;
-  background-color: unset;
-  border-radius: 4px 4px 0 0;
-  border-bottom: none;
-}
+    #hud.hud-find {
+        display: flex;
+    }
 
-#vomnibar ul {
-  background-color: rgba(76, 86, 106, 0.8);
-}
+    span#hud-find-input {
+        position: relative;
+        width: 100%;
 
-#vomnibar li {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  color: #E5E9F0;
-}
+        &::before {
+            position: sticky;
+            left: 0;
+            padding-right: 4px;
+            color: var(--text-secondary);
+            background: linear-gradient(90deg,
+                    var(--background) 0%,
+                    var(--background) 50%,
+                    transparent 100%);
+        }
+    }
 
-#vomnibar li.vomnibarSelected {
-  background-color: rgba(136, 192, 208, 1);
-}
+    span#hud-find-input,
+    #hud {
+        color: var(--text-secondary);
+    }
 
-#vomnibar li .vomnibarSource {
-  color: #D8DEE9;
-}
+    #hud-match-count {
+        flex-shrink: 0;
+        float: none;
+        padding-left: 4px;
+    }
 
-#vomnibar li em, #vomnibar li .vomnibarTitle {
-  color: #ECEFF4;
-}
-
-#vomnibar li .vomnibarUrl {
-  color: #88C0D0;
-}
-
-#vomnibar li .vomnibarMatch {
-  color: #EBCB8B;
-}
-
-#vomnibar li em .vomnibarMatch, #vomnibar li .vomnibarTitle .vomnibarMatch {
-  color: #EBCB8B;
-}
-
-#vomnibar li.vomnibarSelected .vomnibarSource {
-  color: #4C566A;
-}
-
-#vomnibar li.vomnibarSelected em, #vomnibar li.vomnibarSelected .vomnibarTitle {
-  color: #3B424F;
-}
-
-#vomnibar li.vomnibarSelected .vomnibarUrl {
-  color: #4C566A;
-}
-
-#vomnibar li.vomnibarSelected .vomnibarMatch {
-  color: #2E3440;
-}
-
-/* Light Markers */
-div > .internalVimiumHintMarker.vimiumHintMarker {
-  background: #EBCB8B;
-  font-size: 12px;
-  border: 1px solid rgba(0,0,0,0.15)
-  border-radius: 5px;
-  box-shadow: 0em 0.1em 0.6em 0.1em rgba(0, 0, 0, 0.2);
-  padding: 2px 4px;
-}
-
-/* Link hint text */
-div > .internalVimiumHintMarker.vimiumHintMarker span {
-  color: #3B4252;
-  font-size: inherit;
-  text-shadow: none;
-}
-
-/* Link hint matching characters */
-div > .internalVimiumHintMarker.vimiumHintMarker > .matchingCharacter {
-  color: #2E3440;
-}
-
-/* Dark Markers */
-/* Remove everything from here below if you prefer light markers */
-div > .internalVimiumHintMarker.vimiumHintMarker {
-  background: #5E81AC;
-  font-size: 12px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0em 0.1em 0.6em 0.1em rgba(0, 0, 0, 0.2);
-  padding: 2px 4px;
-}
-
-/* Link hint text */
-div > .internalVimiumHintMarker.vimiumHintMarker span {
-  color: #ECEFF4;
-  font-size: inherit;
-  text-shadow: none;
-}
-
-/* Link hint matching characters */
-div > .internalVimiumHintMarker.vimiumHintMarker > .matchingCharacter {
-  color: #FFF;
+    #hud.hud-find,
+    #search-area {
+        background-color: transparent;
+        border: none;
+    }
 }
