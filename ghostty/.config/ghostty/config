@@ -7,7 +7,7 @@ confirm-close-surface = false
 font-family = "Hack Nerd Font Mono"
 font-size = 14
 
-theme = nord-wave
+theme = "Nord Wave"
 
 keybind = cmd+a=text:\x01
 keybind = cmd+b=text:\x02
