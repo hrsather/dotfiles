@@ -11,6 +11,7 @@ return {
                 },
                 grep = {
                     hidden = true,
+                    regex = false,
                 },
             },
             win = {
