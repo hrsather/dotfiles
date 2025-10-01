@@ -5,6 +5,7 @@
     rebase = true
 
 [core]
+    ignorecase = false
     excludesFile = ~/dotfiles/git/.gitignore_global
 [git]
 	name = Hayden Sather
