@@ -50,7 +50,7 @@ start-at-login = true
     if.app-id = 'com.microsoft.Outlook'
     run = ['move-node-to-workspace 2']
 [[on-window-detected]]
-    if.app-id = 'ch.protonmail.protonmailbridge'
+    if.app-id = 'ch.protonmail.desktop'
     run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
