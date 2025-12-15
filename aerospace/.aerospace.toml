@@ -18,6 +18,7 @@ start-at-login = true
     ctrl-c = "workspace c"
     ctrl-m = "workspace m"
     ctrl-n = "workspace n"
+    ctrl-f = "workspace f"
 
     ctrl-shift-1 = 'move-node-to-workspace 1'
     ctrl-shift-2 = 'move-node-to-workspace 2'
@@ -92,3 +93,7 @@ start-at-login = true
 [[on-window-detected]]
     if.app-id = 'com.apple.Notes'
     run = ['move-node-to-workspace n']
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.finder'
+    run = ['move-node-to-workspace f']
