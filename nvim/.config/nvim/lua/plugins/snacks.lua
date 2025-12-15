@@ -32,23 +32,6 @@ return {
         indent = {},
         quickfile = {},
         buffdelete = {},
-        gitbrowse = {
-            what = "file",
-            url_patterns = {
-                ["github%.com"] = {
-                    file = "/blob/{branch}/{file}",
-                },
-                ["gitlab%.com"] = {
-                    file = "/-/blob/{branch}/{file}",
-                },
-                ["bitbucket%.org"] = {
-                    file = "/src/{branch}/{file}",
-                },
-                ["git.sr.ht"] = {
-                    file = "/tree/{branch}/item/{file}",
-                },
-            },
-        },
         image = {}
     },
     keys = {
@@ -57,6 +40,5 @@ return {
         { "<leader>/",       function() Snacks.picker.grep() end,           desc = "Grep" },
         { "gr",              function() Snacks.picker.lsp_references() end, desc = "References" },
         { "<leader>g",       function() Snacks.lazygit() end,               desc = "LazyGit" },
-        { "gb",              function() Snacks.gitbrowse() end,             desc = "GitBrowse" },
     },
 }
