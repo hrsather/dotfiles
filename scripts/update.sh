@@ -19,6 +19,9 @@ brew cu --all --force
 brew autoremove
 brew cleanup
 
+# Install neovim in root
+/usr/bin/python3 -m pip install neovim
+
 # Create dir for conda envs so they don't get overwritten on update
 conda config --add envs_dirs $HOME/.conda/envs
 
