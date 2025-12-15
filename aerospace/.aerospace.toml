@@ -6,7 +6,6 @@ start-at-login = true
     alt-k = 'focus up'
     alt-l = 'focus right'
 
-    ctrl-0 = 'workspace 0'
     ctrl-1 = 'workspace 1'
     ctrl-2 = 'workspace 2'
     ctrl-3 = 'workspace 3'
@@ -16,8 +15,10 @@ start-at-login = true
     ctrl-7 = 'workspace 7'
     ctrl-8 = 'workspace 8'
     ctrl-9 = 'workspace 9'
+    ctrl-c = "workspace c"
+    ctrl-m = "workspace m"
+    ctrl-n = "workspace n"
 
-    ctrl-shift-0 = 'move-node-to-workspace 0'
     ctrl-shift-1 = 'move-node-to-workspace 1'
     ctrl-shift-2 = 'move-node-to-workspace 2'
     ctrl-shift-3 = 'move-node-to-workspace 3'
@@ -32,7 +33,6 @@ start-at-login = true
     ctrl-j = 'focus down'
     ctrl-k = 'focus up'
     ctrl-l = 'focus right'
-
 
 [gaps]
     inner.horizontal = 20
@@ -78,5 +78,17 @@ start-at-login = true
     run = ['move-node-to-workspace 9']
 
 [[on-window-detected]]
+    if.app-id = 'org.jkiss.dbeaver.core.product'
+    run = ['move-node-to-workspace 9']
+
+[[on-window-detected]]
     if.app-id = 'com.apple.iCal'
-    run = ['move-node-to-workspace 0']
+    run = ['move-node-to-workspace c']
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.MobileSMS'
+    run = ['move-node-to-workspace m']
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.Notes'
+    run = ['move-node-to-workspace n']
