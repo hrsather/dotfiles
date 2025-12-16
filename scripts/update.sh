@@ -100,3 +100,11 @@ defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 # Disable pop up for special chars when typing
 defaults write -g ApplePressAndHoldEnabled -bool false
+# Set color theme to graphite
+defaults write -g AppleAccentColor -int -1
+# Set icons to clear
+defaults write -g AppleIconStyle -string Tinted
+# Set Text highlight color to nord
+defaults write -g AppleHighlightColor -string "0.533 0.753 0.816"
+defaults write -g AppleAccentColor -int -2
+defaults write -g AppleAccentColorRGB -string "0.532999 0.753083 0.815873"
