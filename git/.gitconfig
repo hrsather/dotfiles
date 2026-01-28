@@ -9,3 +9,5 @@
     excludesFile = ~/dotfiles/git/.gitignore_global
 [git]
 	name = Hayden Sather
+[user]
+	name = Hayden Sather
