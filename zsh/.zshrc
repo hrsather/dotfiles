@@ -67,7 +67,9 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
 # zoxide
-eval "$(zoxide init --cmd cd zsh)"
+if [[ -o interactive ]]; then
+  eval "$(zoxide init --cmd cd zsh)"
+fi
 
 # powerlevel10k
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
