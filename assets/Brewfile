@@ -55,6 +55,7 @@ brew "ffmpeg"
 brew "black"
 brew "kubectl"
 brew "tree"
+brew "kustomize"
 
 # Personal stuff
 # brew "awscli"
