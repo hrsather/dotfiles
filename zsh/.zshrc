@@ -75,6 +75,10 @@ fi
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+alias us5="osascript -e 'tell application \"Viscosity\" to connect \"us5-vpn-client\"'"
+alias ag1="osascript -e 'tell application \"Viscosity\" to connect \"ag1-vpn-client\"'"
+alias dv1="osascript -e 'tell application \"Viscosity\" to connect \"dv1-vpn-client\"'"
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
