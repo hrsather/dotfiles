@@ -1,2 +1,17 @@
 btop/.config/btop/btop.log
 nvim/.config/nvim/lazy-lock.json
+
+
+# Credentials
+*.pem
+*.key
+*.crt
+*.env
+**/credentials*
+**/secrets*
+**/*token*
+**/client.yml
+
+# Cache
+**/.cache/
+**/cache/

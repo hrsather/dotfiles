@@ -20,6 +20,7 @@ brew autoremove
 brew cleanup
 
 # Install neovim in root
+/usr/bin/python3 -m pip install --upgrade pip
 /usr/bin/python3 -m pip install neovim
 
 # Create dir for conda envs so they don't get overwritten on update
@@ -32,11 +33,15 @@ nvim --headless "+Lazy! sync" +qa
 nvim --headless +TSUpdateSync +qa
 
 # Load configs
-packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin" "git" "ruff")
+packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin" "git" "ruff" "lazygit" "claude" "spotatui")
 DOTFILES_DIR="${HOME}/dotfiles"
 for package in "${packages[@]}"; do
     stow --dir="$DOTFILES_DIR" "$package"
 done
+
+# Link Spotatui app
+mkdir -p "${HOME}/Applications"
+ln -sf "${HOME}/dotfiles/apps/Spotatui.app" "${HOME}/Applications/Spotatui.app"
 
 # Fix lazygit install location
 mkdir -p "${HOME}/Library/Application Support/lazygit/"
