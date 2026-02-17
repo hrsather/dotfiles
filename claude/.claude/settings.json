@@ -1,0 +1,31 @@
+{
+  "model": "opus",
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git branch*)",
+      "Bash(git stash*)",
+      "Bash(shellcheck *)",
+      "Bash(stow *)",
+      "Bash(brew list*)",
+      "Bash(brew info*)",
+      "Bash(npm test*)",
+      "Bash(npm run *)",
+      "Bash(python *)",
+      "Bash(pytest *)",
+      "WebSearch"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 2
+  }
+}
