@@ -1,4 +1,0 @@
-#!/bin/bash
-open -na /Applications/Ghostty.app --args --title=Spotatui --command=/opt/homebrew/bin/spotatui
-sleep 1
-/opt/homebrew/bin/aerospace move-node-to-workspace 3
