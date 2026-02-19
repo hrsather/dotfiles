@@ -8,6 +8,13 @@ fi
 
 set -o emacs
 
+clear-screen-bottom() {
+  printf '\n%.0s' {1..$LINES}
+  zle reset-prompt
+}
+zle -N clear-screen-bottom
+bindkey '^L' clear-screen-bottom
+
 setopt interactive_comments
 
 export EDITOR="nvim"
@@ -75,9 +82,19 @@ fi
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-alias us5="osascript -e 'tell application \"Viscosity\" to connect \"us5-vpn-client\"'"
-alias ag1="osascript -e 'tell application \"Viscosity\" to connect \"ag1-vpn-client\"'"
-alias dv1="osascript -e 'tell application \"Viscosity\" to connect \"dv1-vpn-client\"'"
+vpn() {
+  osascript -e 'tell application "Viscosity" to connect "dv1-vpn-client"'
+  osascript -e 'tell application "Viscosity" to connect "ag1-vpn-client"'
+  osascript -e 'tell application "Viscosity" to connect "us5-vpn-client"'
+  (while true; do curl -sf https://argocd.ai.wa.main.us5.axon.io > /dev/null; sleep 30; done) &
+  (while true; do curl -sf https://argocd.ai.va.main.ag1.axon.us > /dev/null; sleep 30; done) &
+  (while true; do curl -sf https://git.taservs.net/ > /dev/null; sleep 30; done) &
+}
+
+vpn-stop() {
+  osascript -e 'tell application "Viscosity" to disconnectAll'
+  kill $(jobs -p) 2>/dev/null
+}
 
 
 # >>> conda initialize >>>
