@@ -2,11 +2,16 @@
     "model": "opus",
     "permissions": {
         "allow": [
+            "Read",
+            "Grep",
+            "Glob",
             "WebSearch",
             "WebFetch(domain:github.com)",
             "Bash(git status*)",
             "Bash(git diff*)",
             "Bash(git log*)",
+            "Bash(git remote*)",
+            "Bash(git show*)",
             "Bash(brew list*)",
             "Bash(brew info*)",
             "Bash(pytest *)",
@@ -16,7 +21,11 @@
             "Bash(jira issue create:*)",
             "Bash(jira issue view:*)",
             "Bash(ls:*)",
-            "Bash(sort:*)"
+            "Bash(sort:*)",
+            "Bash(which *)",
+            "Bash(wc *)",
+            "Bash(gh pr view*)",
+            "Bash(gh issue view*)"
         ],
         "deny": [
             "Bash(rm -rf *)",
