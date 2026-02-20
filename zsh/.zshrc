@@ -1,3 +1,10 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/Users/hsather/.zsh/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 printf '\n%.0s' {1..100}
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -41,6 +48,7 @@ alias nt="tmux rename-window -t 1 Code && tmux new-window -n Shell && tmux selec
 alias k="kubectl"
 
 export BAT_THEME="Nord"
+export OPENSPEC_TELEMETRY=0
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
