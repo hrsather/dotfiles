@@ -5,7 +5,8 @@
 - Never commit secrets, tokens, or credentials
 
 ## Shell
-- Create scripts for zsh, not bash
+- Create bash scripts that will work on MacOS's bash
+- Prefer rg over grep and fd over find for repository searches.
 
 ## Jira (project: AIPE)
 - When starting work, check for active tickets that correlate: `jira issue list -s "In Progress" -s "To Do" -s "Backlog" -a hsather@axon.com --project AIPE`
