@@ -38,6 +38,10 @@ end
 vim.keymap.set("n", "Y", "y$", { noremap = true })
 -- Visual block
 vim.keymap.set("n", "<leader>v", "<C-v>", { noremap = true, desc = "Visual block" })
+-- Tab to accept completion if menu is visible
+vim.keymap.set("i", "<Tab>", function()
+    return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
+end, { expr = true, noremap = true })
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>h", vim.diagnostic.open_float, { desc = "Show diagnostic error messages" })
 -- buffers
@@ -71,6 +75,10 @@ vim.keymap.set("n", "zl", ":bprev<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "zr", ":bnext<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-w>", function() Snacks.bufdelete.delete() end,
     { desc = "Delete buffer", nowait = true })
+-- file explorer
+vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<CR>", { noremap = true, desc = "Open cwd" })
+vim.keymap.set("n", "<leader>E", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
+    { noremap = true, desc = "Open root" })
 -- split movements
 vim.keymap.set('n', '<C-h>', '<Cmd>wincmd h<CR>', { desc = 'Move to left split' })
 vim.keymap.set('n', '<C-l>', '<Cmd>wincmd l<CR>', { desc = 'Move to right split' })

@@ -73,9 +73,5 @@ return {
                 map_split("<space>|", "belowright vertical")
             end,
         })
-        -- mini files
-        vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<CR>", { noremap = true, desc = "Open cwd" })
-        vim.keymap.set("n", "<leader>E", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
-            { noremap = true, desc = "Open root" })
     end,
 }
