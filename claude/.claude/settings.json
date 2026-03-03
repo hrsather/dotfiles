@@ -30,7 +30,10 @@
             "Bash(which *)",
             "Bash(wc *)",
             "Bash(gh pr view*)",
-            "Bash(gh issue view*)"
+            "Bash(gh issue view*)",
+            "Bash(openspec new:*)",
+            "Bash(openspec status:*)",
+            "Bash(openspec instructions:*)"
         ],
         "deny": [
             "Bash(rm -rf *)",
