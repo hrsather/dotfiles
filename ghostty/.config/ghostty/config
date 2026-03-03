@@ -44,5 +44,6 @@ keybind = cmd+6=text:yh6
 keybind = cmd+7=text:yh7
 keybind = cmd+8=text:yh8
 keybind = cmd+9=text:yh9
+keybind = cmd+left=text:\x1b[H
 keybind = cmd+alt+left=text:zl
 keybind = cmd+alt+right=text:zr

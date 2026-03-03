@@ -21,6 +21,7 @@ clear-screen-bottom() {
 }
 zle -N clear-screen-bottom
 bindkey '^L' clear-screen-bottom
+bindkey '\e[1~' beginning-of-line
 
 setopt interactive_comments
 
