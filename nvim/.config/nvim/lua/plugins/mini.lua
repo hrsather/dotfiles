@@ -11,7 +11,7 @@ return {
         require("mini.diff").setup({ view = { style = "sign", signs = { add = "+", change = "~", delete = "-" } } })
 
         -- sessions
-        require("mini.sessions").setup({ autoread = false, file = ".Session.vim" })
+        require("mini.sessions").setup({ autoread = true, file = ".Session.vim" })
 
         -- pairs
         require("mini.pairs").setup()

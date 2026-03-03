@@ -40,13 +40,11 @@ vim.keymap.set("n", "Y", "y$", { noremap = true })
 vim.keymap.set("n", "<leader>v", "<C-v>", { noremap = true, desc = "Visual block" })
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>h", vim.diagnostic.open_float, { desc = "Show diagnostic error messages" })
-vim.diagnostic.config({ virtual_text = true })
 -- buffers
 vim.keymap.set("n", "<leader>b", "<cmd>e #<cr>", { noremap = true, desc = "Last Buffer" })
 vim.keymap.set("n", "<leader>q", "<cmd>wq<cr>", { noremap = true, desc = "Close Buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>wqa<cr>", { noremap = true, desc = "Close All Buffers" })
 -- shortcuts
-vim.keymap.set("n", "<leader>g", "<cmd>LazyGit<cr>", { noremap = true, desc = "LazyGit" })
 vim.keymap.set("n", "<leader>-", ":split<cr>", { desc = "Split Window Below", remap = true })
 vim.keymap.set("n", "<leader>|", ":vsplit<cr>", { desc = "Split Window Right", remap = true })
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
@@ -54,7 +52,7 @@ vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 vim.keymap.set("v", "<leader>j", "J", { desc = "Join" })
 vim.keymap.set("v", "J", "j", { desc = "Shift-J is j in v mode" })
 vim.keymap.set("v", "K", "k", { desc = "Shift-K is k in v mode" })
--- cloze Lazy with <esc>
+-- close Lazy with <esc>
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "lazy",
     desc = "Quit lazy with <esc>",

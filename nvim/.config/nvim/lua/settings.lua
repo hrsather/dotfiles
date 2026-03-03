@@ -2,7 +2,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
--- Make line numbers default
+-- Line numbers
+vim.opt.number = true
 vim.opt.relativenumber = true
 -- Sync clipboard between OS and Neovim.
 vim.opt.clipboard = "unnamedplus"
@@ -13,8 +14,6 @@ vim.opt.timeout = false
 vim.opt.inccommand = "split"
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 15
--- Transparent background
--- vim.g.nord_disable_background = true
 -- Saving session options
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- highlight on yank
@@ -33,10 +32,6 @@ vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 -- don't kick numbers right
 vim.o.signcolumn = "yes"
--- numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.diagnostic.config({ signs = false })
 -- better completion settings
 vim.o.completeopt = "menu,menuone,noselect"
 -- default spacing
@@ -46,19 +41,12 @@ vim.o.expandtab = true
 -- smart '/' searching
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- Create a session file for each repo opened
+-- Create session file if one doesn't exist (mini.sessions handles read/write)
 vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "*",
     nested = true,
     callback = function()
-        -- Check if no file arguments were provided
-        if vim.fn.argc() == 0 then
-            local session_file = vim.fn.getcwd() .. '/.Session.vim'
-            if vim.fn.filereadable(session_file) == 1 then
-                vim.cmd('source ' .. session_file)
-            else
-                vim.cmd('mksession! ' .. session_file)
-            end
+        if vim.fn.argc() == 0 and vim.fn.filereadable(vim.fn.getcwd() .. "/.Session.vim") == 0 then
+            MiniSessions.write(".Session.vim")
         end
     end,
 })
