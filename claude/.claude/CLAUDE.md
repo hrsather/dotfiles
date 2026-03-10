@@ -7,6 +7,7 @@
 ## Shell
 - Create bash scripts that will work on MacOS's bash
 - Prefer rg over grep and fd over find for repository searches.
+- Never use compound shell commands. Execute only one command per Bash call. Do not use &&, ;, or | to chain commands.
 
 ## Jira (project: AIPE)
 - When starting work, check for active tickets that correlate: `jira issue list -s "In Progress" -s "To Do" -s "Backlog" -a hsather@axon.com --project AIPE`
