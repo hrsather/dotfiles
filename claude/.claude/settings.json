@@ -2,7 +2,6 @@
     "model": "opus",
     "permissions": {
         "deny": [
-            "Bash(rm -rf *)",
             "Bash(git push --force*)",
             "Bash(git push -f *)",
             "Bash(git reset --hard*)",
@@ -29,7 +28,8 @@
             "Bash(az *)",
             "Bash(openspec *)",
             "Bash(jira *)",
-            "WebFetch(domain:github.com)"
+            "WebFetch(domain:github.com)",
+            "Bash(rm *)"
         ]
     },
     "statusLine": {
