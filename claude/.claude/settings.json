@@ -1,6 +1,14 @@
 {
     "model": "opus",
     "permissions": {
+        "deny": [
+            "Bash(rm -rf *)",
+            "Bash(git push --force*)",
+            "Bash(git push -f *)",
+            "Bash(git reset --hard*)",
+            "Bash(git checkout -- *)",
+            "Bash(git clean -f*)"
+        ],
         "allow": [
             "Read",
             "Grep",
@@ -8,37 +16,20 @@
             "WebSearch",
             "Bash(fd:*)",
             "Bash(head:*)",
-            "Bash(git clone:*)",
             "Bash(rg:*)",
             "Bash(echo:*)",
-            "WebFetch(domain:github.com)",
-            "Bash(git status*)",
-            "Bash(git diff*)",
-            "Bash(git log*)",
-            "Bash(git remote*)",
-            "Bash(git show*)",
-            "Bash(brew list*)",
-            "Bash(brew info*)",
-            "Bash(pytest *)",
-            "Bash(jira issue comment add:*)",
-            "Bash(jira issue move:*)",
-            "Bash(jira issue list:*)",
-            "Bash(jira issue create:*)",
-            "Bash(jira issue view:*)",
             "Bash(ls:*)",
             "Bash(sort:*)",
             "Bash(which *)",
             "Bash(wc *)",
-            "Bash(gh pr view*)",
-            "Bash(gh issue view*)",
-            "Bash(openspec new:*)",
-            "Bash(openspec status:*)",
-            "Bash(openspec instructions:*)"
-        ],
-        "deny": [
-            "Bash(rm -rf *)",
-            "Bash(git push --force*)",
-            "Bash(git reset --hard*)"
+            "Bash(brew list*)",
+            "Bash(brew info*)",
+            "Bash(git *)",
+            "Bash(gh *)",
+            "Bash(az *)",
+            "Bash(openspec *)",
+            "Bash(jira *)",
+            "WebFetch(domain:github.com)"
         ]
     },
     "statusLine": {
