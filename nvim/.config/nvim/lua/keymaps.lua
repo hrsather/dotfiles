@@ -36,6 +36,12 @@ end
 , { expr = true, desc = "Toggle comment line" })
 -- Y to yank right
 vim.keymap.set("n", "Y", "y$", { noremap = true })
+-- yp to yank full path
+vim.keymap.set("n", "yp", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    vim.notify("Copied: " .. path)
+end, { noremap = true, desc = "Yank full path" })
 -- Visual block
 vim.keymap.set("n", "<leader>v", "<C-v>", { noremap = true, desc = "Visual block" })
 -- Tab to accept completion if menu is visible

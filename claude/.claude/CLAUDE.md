@@ -4,6 +4,10 @@
 - Prefer simple, direct solutions over clever or over-engineered ones
 - Never commit secrets, tokens, or credentials
 
+## Git
+- Commit messages must be prefixed with `fix:` or `feat:`
+- Branch names must be prefixed with `feature/` or `fix/`
+
 ## Shell
 - Create bash scripts that will work on MacOS's bash
 - Prefer rg over grep and fd over find for repository searches.
