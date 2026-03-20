@@ -82,6 +82,13 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # trash-cli
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
+# Claude skills from ai-skills repo
+export AI_SKILLS_DIR=~/Repos/ai-skills
+for skill in "$AI_SKILLS_DIR"/.claude/skills/*/; do
+  skill_name=$(basename "$skill")
+  ln -sfn "$skill" ~/.claude/skills/"$skill_name"
+done
+
 # zoxide
 if [[ -o interactive ]]; then
   eval "$(zoxide init --cmd cd zsh)"

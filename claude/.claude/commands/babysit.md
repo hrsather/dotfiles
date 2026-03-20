@@ -10,3 +10,5 @@ Babysit an OpenSpec change end-to-end. Implement tasks, run verification, diagno
 **Input**: Optionally specify a change name (e.g., `/babysit add-auth`). If omitted, auto-select the active change or ask.
 
 Follow the full workflow defined in the `babysit` skill.
+
+**When finished**: Run `printf '\a'` to ring the terminal bell so the user knows the run is complete.

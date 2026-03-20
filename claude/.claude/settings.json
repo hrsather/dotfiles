@@ -1,13 +1,5 @@
 {
-    "model": "opus",
     "permissions": {
-        "deny": [
-            "Bash(git push --force*)",
-            "Bash(git push -f *)",
-            "Bash(git reset --hard*)",
-            "Bash(git checkout -- *)",
-            "Bash(git clean -f*)"
-        ],
         "allow": [
             "Read",
             "Grep",
@@ -31,11 +23,20 @@
             "Bash(jira *)",
             "WebFetch(domain:github.com)",
             "Bash(rm *)"
+        ],
+        "deny": [
+            "Bash(git push --force*)",
+            "Bash(git push -f *)",
+            "Bash(git reset --hard*)",
+            "Bash(git checkout -- *)",
+            "Bash(git clean -f*)"
         ]
     },
+    "model": "opus",
     "statusLine": {
         "type": "command",
         "command": "~/.claude/statusline.sh",
         "padding": 2
-    }
+    },
+    "skipDangerousModePermissionPrompt": true
 }

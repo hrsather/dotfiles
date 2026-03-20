@@ -7,6 +7,7 @@
 ## Git
 - Commit messages must be prefixed with `fix:` or `feat:`
 - Branch names must be prefixed with `feature/` or `fix/`
+- Use `git commit -m "message"` — never use heredocs or command substitution in commit commands
 
 ## Shell
 - Create bash scripts that will work on MacOS's bash
