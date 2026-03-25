@@ -57,9 +57,9 @@ brew "black"
 brew "kubectl"
 brew "tree"
 brew "kustomize"
+brew "awscli"
 
 # Personal stuff
-# brew "awscli"
 # cask "proton-mail"
 # brew "aws-cdk"
 # brew "kubectl"
