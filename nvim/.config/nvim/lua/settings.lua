@@ -43,4 +43,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 -- Don't notify on mode switches
 vim.opt.showmode = false
-vim.o.cmdheight = 0
