@@ -1,5 +1,8 @@
--- Clear search highlights and dismiss Noice
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><cmd>NoiceDismiss<CR>")
+-- Clear search highlights
+vim.keymap.set("n", "<Esc>", function()
+    vim.cmd("nohlsearch")
+    Snacks.notifier.hide()
+end)
 -- Center cursor after moving page
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -34,8 +37,6 @@ vim.keymap.set("n", "gc", function()
     return require("vim._comment").operator() .. "_"
 end
 , { expr = true, desc = "Toggle comment line" })
--- Y to yank right
-vim.keymap.set("n", "Y", "y$", { noremap = true })
 -- yp to yank full path
 vim.keymap.set("n", "yp", function()
     local path = vim.fn.expand("%:p")
@@ -55,24 +56,13 @@ vim.keymap.set("n", "<leader>b", "<cmd>e #<cr>", { noremap = true, desc = "Last 
 vim.keymap.set("n", "<leader>q", "<cmd>wq<cr>", { noremap = true, desc = "Close Buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>wqa<cr>", { noremap = true, desc = "Close All Buffers" })
 -- shortcuts
-vim.keymap.set("n", "<leader>-", ":split<cr>", { desc = "Split Window Below", remap = true })
-vim.keymap.set("n", "<leader>|", ":vsplit<cr>", { desc = "Split Window Right", remap = true })
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+vim.keymap.set("n", "<leader>-", "<cmd>split<cr>", { desc = "Split Window Below" })
+vim.keymap.set("n", "<leader>|", "<cmd>vsplit<cr>", { desc = "Split Window Right" })
+vim.keymap.set("n", "<leader>l", "<cmd>Pack<cr>", { desc = "Pack" })
 -- Joining
 vim.keymap.set("v", "<leader>j", "J", { desc = "Join" })
 vim.keymap.set("v", "J", "j", { desc = "Shift-J is j in v mode" })
 vim.keymap.set("v", "K", "k", { desc = "Shift-K is k in v mode" })
--- close Lazy with <esc>
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "lazy",
-    desc = "Quit lazy with <esc>",
-    callback = function()
-        vim.keymap.set("n", "<esc>", function()
-            vim.api.nvim_win_close(0, false)
-        end, { buffer = true, nowait = true })
-    end,
-    group = vim.api.nvim_create_augroup("LazyUserGroup", { clear = true }),
-})
 -- Save on Ctrl+S
 vim.keymap.set("n", "<C-S>", ":update<CR>", { silent = true, noremap = true })
 vim.keymap.set("i", "<C-S>", "<Esc>:update<CR>", { silent = true, noremap = true })
@@ -82,9 +72,9 @@ vim.keymap.set("n", "zr", ":bnext<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-w>", function() Snacks.bufdelete.delete() end,
     { desc = "Delete buffer", nowait = true })
 -- file explorer
-vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<CR>", { noremap = true, desc = "Open cwd" })
-vim.keymap.set("n", "<leader>E", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
-    { noremap = true, desc = "Open root" })
+vim.keymap.set("n", "<leader>e", function() MiniFiles.open() end, { noremap = true, desc = "Open cwd" })
+vim.keymap.set("n", "<leader>E", function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end,
+    { noremap = true, desc = "Open current file dir" })
 -- split movements
 vim.keymap.set('n', '<C-h>', '<Cmd>wincmd h<CR>', { desc = 'Move to left split' })
 vim.keymap.set('n', '<C-l>', '<Cmd>wincmd l<CR>', { desc = 'Move to right split' })

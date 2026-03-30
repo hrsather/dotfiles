@@ -1,28 +1,6 @@
-return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        -- TODO: Update to "main" branch once 0.12 is out
-        branch = "master",
-        main = 'nvim-treesitter.configs',
-        opts = {
-            ensure_installed = { 'python', 'yaml', 'json', 'bash', 'html', 'toml', 'lua', 'markdown', 'markdown_inline', 'dockerfile', 'jq' },
-            highlight = { enable = true },
-            indent = { enable = true },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "<cr>",
-                    node_incremental = "<cr>",
-                    node_decremental = "<BS>",
-                }
-            }
-        }
-    },
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        opts = {
-            enable = true,
-        }
-    },
-}
+local sel = require("vim.treesitter._select")
+vim.keymap.set("n", "<cr>", "viw", { desc = "Init treesitter selection" })
+vim.keymap.set("x", "<cr>", function() sel.select_parent(vim.v.count1) end, { desc = "Expand selection" })
+vim.keymap.set("x", "<BS>", function() sel.select_child(vim.v.count1) end, { desc = "Shrink selection" })
+
+require("treesitter-context").setup({ enable = true })

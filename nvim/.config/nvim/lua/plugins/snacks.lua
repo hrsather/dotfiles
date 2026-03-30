@@ -1,44 +1,38 @@
-return {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
-    opts = {
-        picker = {
-            sources = {
-                files = {
-                    hidden = true,
-                },
-                grep = {
-                    hidden = true,
-                    regex = false,
-                },
+require("snacks").setup({
+    picker = {
+        sources = {
+            files = {
+                hidden = true,
             },
-            win = {
-                input = {
-                    keys = {
-                        ["<Esc>"] = { "close", mode = { "n", "i" } },
-                    },
-                },
+            grep = {
+                hidden = true,
+                regex = false,
             },
-            exclude = {
-                ".git",
-                "node_modules",
-                "poetry.lock",
-            }
         },
-        bigfile = {},
-        lazygit = {},
-        indent = {},
-        quickfile = {},
-        buffdelete = {},
-        image = {}
+        win = {
+            input = {
+                keys = {
+                    ["<Esc>"] = { "close", mode = { "n", "i" } },
+                },
+            },
+        },
+        exclude = {
+            ".git",
+            "node_modules",
+            "poetry.lock",
+        }
     },
-    keys = {
-        { "<leader><space>", function() Snacks.picker.files() end,          desc = "Smart Find Files" },
-        { "<leader>sr",      function() Snacks.picker.resume() end,         desc = "Resume" },
-        { "<leader>/",       function() Snacks.picker.grep() end,           desc = "Grep" },
-        { "gr",              function() Snacks.picker.lsp_references() end, desc = "References" },
-        { "<leader>g",       function() Snacks.lazygit() end,               desc = "LazyGit" },
-    },
-}
+    notifier = {},
+    bigfile = {},
+    lazygit = {},
+    indent = {},
+    quickfile = {},
+    bufdelete = {},
+    image = {}
+})
+
+vim.keymap.set("n", "<leader><space>", function() Snacks.picker.files() end, { desc = "Smart Find Files" })
+vim.keymap.set("n", "<leader>sr", function() Snacks.picker.resume() end, { desc = "Resume" })
+vim.keymap.set("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
+vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, { desc = "References" })
+vim.keymap.set("n", "<leader>g", function() Snacks.lazygit() end, { desc = "LazyGit" })

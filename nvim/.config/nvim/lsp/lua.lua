@@ -8,11 +8,10 @@ return {
     settings = {
         Lua = {
             runtime = {
-                version = "LuaJIT", -- or "Lua 5.1", etc.
-                path = vim.split(package.path, ";"),
+                version = "LuaJIT",
             },
             diagnostics = {
-                globals = { "vim", "Snacks" }, -- Prevent 'vim' is undefined warning
+                globals = { "vim", "Snacks" },
             },
             workspace = {
                 library = vim.api.nvim_get_runtime_file("", true),

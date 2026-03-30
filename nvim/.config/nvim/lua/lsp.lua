@@ -3,11 +3,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         local buf = args.buf
-        local opts = { buffer = buf, silent = true }
-
         -- Keymaps
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
+        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = buf, desc = "Rename" })
 
         -- Enable autocompletion if supported
         if client:supports_method('textDocument/completion') then
