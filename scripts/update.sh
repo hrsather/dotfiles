@@ -27,7 +27,7 @@ brew cleanup
 conda config --add envs_dirs $HOME/.conda/envs
 
 # Update nvim packages
-nvim --headless "+Lazy! sync" +qa
+nvim --headless "+lua vim.pack.update()" +qa
 
 # Update Treesitter langs
 nvim --headless +TSUpdateSync +qa
