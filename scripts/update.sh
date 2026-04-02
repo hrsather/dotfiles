@@ -57,37 +57,21 @@ tmux source-file ~/.tmux.conf
 git submodule update --init --recursive
 git submodule update --remote --recursive
 
-# Rebase Betterfox patches onto latest upstream
-cd "${HOME}/dotfiles/firefox/Betterfox"
-git fetch upstream
-git checkout mymain
-git rebase upstream/main
-git push origin mymain --force-with-lease
-cd "${HOME}/dotfiles"
-
 # Update Firefox
 PROFILES_PATH="${HOME}/Library/Application Support/Firefox/Profiles/"
-PROFILE=$(ls "$PROFILES_PATH" | grep '\.default-release')
+PROFILE=$(ls -t "$PROFILES_PATH" | grep '\.default-release' | head -1)
 PROFILE_PATH="${PROFILES_PATH}${PROFILE}"
 mkdir -p "${PROFILE_PATH}/chrome"
-BETTERFOX_DIR="${HOME}/dotfiles/firefox/Betterfox"
-for file in "$BETTERFOX_DIR"/*; do
-    filename=$(basename "$file")
-
-    if [[ "$filename" == "user.js" ]]; then
-        if [[ -e "$PROFILE_PATH/user.js" || -L "$PROFILE_PATH/user.js" ]]; then
-            rm -f "$PROFILE_PATH/user.js"
-        fi
-        ln -s "$(realpath "$file")" "$PROFILE_PATH/user.js"
-    else
-        if [[ -e "$PROFILE_PATH/chrome/$filename" || -L "$PROFILE_PATH/chrome/$filename" ]]; then
-            rm -f "$PROFILE_PATH/chrome/$filename"
-        fi
-        ln -sf "$(realpath "$file")" "$PROFILE_PATH/chrome/$filename"
-    fi
-done
+FIREFOX_DIR="${HOME}/dotfiles/firefox"
+rm -f "$PROFILE_PATH/user.js"
+cp "$FIREFOX_DIR/user.js" "$PROFILE_PATH/user.js"
+ln -sf "$(realpath "$FIREFOX_DIR/userChrome.css")" "$PROFILE_PATH/chrome/userChrome.css"
+cp "$FIREFOX_DIR/userContent.css" "$PROFILE_PATH/chrome/userContent.css"
+cp "${HOME}/dotfiles/assets/background.png" "$PROFILE_PATH/chrome/background.png"
 
 # Mac settings
+# Auto-hide scrollbars
+defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 # Audo hide dock
 defaults write com.apple.dock "autohide" -bool true
 # Audo hide menu bar

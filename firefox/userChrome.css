@@ -28,6 +28,22 @@
     display: none !important;
 }
 
+/* Hide Firefox View button */
+#firefox-view-button {
+    display: none !important;
+}
+
+/* Hide Sidebar button */
+#sidebar-button {
+    display: none !important;
+}
+
+/* Remove toolbar spacers */
+.titlebar-spacer,
+toolbarspring {
+    display: none !important;
+}
+
 /* Hide List all tabs button */
 #alltabs-button {
     display: none !important;

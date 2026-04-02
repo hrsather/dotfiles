@@ -1,0 +1,11 @@
+@-moz-document url("about:home"), url("about:newtab") {
+    body {
+        background: url("background.png") no-repeat center center fixed !important;
+        background-size: cover !important;
+    }
+
+    main {
+        background: transparent !important;
+    }
+}
+
