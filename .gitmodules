@@ -1,3 +1,4 @@
 [submodule "firefox/Betterfox"]
 	path = firefox/Betterfox
-	url = https://github.com/hrsather/Betterfox.git
+	url = git@github.com:hrsather/Betterfox.git
+	branch = mymain

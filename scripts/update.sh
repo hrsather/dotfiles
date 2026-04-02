@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Ask for sudo upfront
+sudo -v
+
+# Update other software
+sudo softwareupdate -i -a
+
 # Install Homebrew if missing
 if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -29,9 +35,6 @@ conda config --add envs_dirs $HOME/.conda/envs
 # Update nvim packages
 nvim --headless "+lua vim.pack.update()" +qa
 
-# Update Treesitter langs
-nvim --headless +TSUpdateSync +qa
-
 # Load configs
 packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin" "git" "ruff" "lazygit" "claude")
 DOTFILES_DIR="${HOME}/dotfiles"
@@ -47,15 +50,20 @@ ln -s "${HOME}/dotfiles/lazygit/.config/lazygit/config.yml" "${HOME}/Library/App
 # Install/Update OpenSpec
 npm install -g @fission-ai/openspec@latest
 
-# Update other software
-sudo softwareupdate -i -a
-
 # Source tmux
 tmux source-file ~/.tmux.conf
 
 # Update submodules
 git submodule update --init --recursive
 git submodule update --remote --recursive
+
+# Rebase Betterfox patches onto latest upstream
+cd "${HOME}/dotfiles/firefox/Betterfox"
+git fetch upstream
+git checkout mymain
+git rebase upstream/main
+git push origin mymain --force-with-lease
+cd "${HOME}/dotfiles"
 
 # Update Firefox
 PROFILES_PATH="${HOME}/Library/Application Support/Firefox/Profiles/"
