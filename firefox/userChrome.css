@@ -79,5 +79,10 @@ toolbarspring {
     max-width: 100% !important;
 }
 
+/* Hide account button */
+#fxa-toolbar-menu-button {
+    display: none !important;
+}
+
 /* Hide url bar placeholder */
 #urlbar-input::placeholder{ color: transparent }
