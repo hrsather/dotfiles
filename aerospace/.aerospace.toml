@@ -19,6 +19,7 @@ start-at-login = true
     ctrl-m = "workspace m"
     ctrl-n = "workspace n"
     ctrl-f = "workspace f"
+    ctrl-c = "workspace c"
 
     ctrl-shift-1 = 'move-node-to-workspace 1'
     ctrl-shift-2 = 'move-node-to-workspace 2'
@@ -33,6 +34,7 @@ start-at-login = true
     ctrl-shift-m = 'move-node-to-workspace m'
     ctrl-shift-n = 'move-node-to-workspace n'
     ctrl-shift-f = 'move-node-to-workspace f'
+    ctrl-shift-c = 'move-node-to-workspace c'
 
     ctrl-h = 'focus left'
     ctrl-j = 'focus down'
