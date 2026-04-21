@@ -84,10 +84,12 @@ export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
 # Claude skills from ai-skills repo
 export AI_SKILLS_DIR=~/Repos/ai-skills
-for skill in "$AI_SKILLS_DIR"/.agents/skills/*/; do
-  skill_name=$(basename "$skill")
-  ln -sfn "$skill" ~/.agents/skills/"$skill_name"
-done
+if [[ -d "$skills_dir" ]]; then
+  for skill in "$skills_dir"/*(/N); do
+    skill_name=$(basename "$skill")
+    ln -sfn "$skill" ~/.agents/skills/"$skill_name"
+  done
+fi
 
 # zoxide
 if [[ -o interactive ]]; then
