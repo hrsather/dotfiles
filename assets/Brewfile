@@ -62,6 +62,7 @@ brew "tree"
 brew "kustomize"
 brew "awscli"
 brew "poetry"
+brew "helm"
 
 # Personal stuff
 # cask "proton-mail"
