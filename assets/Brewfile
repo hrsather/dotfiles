@@ -63,6 +63,7 @@ brew "kustomize"
 brew "awscli"
 brew "poetry"
 brew "helm"
+cask "claude-code"
 
 # Personal stuff
 # cask "proton-mail"
@@ -72,7 +73,6 @@ brew "helm"
 # Work stuff
 cask "microsoft-azure-storage-explorer"
 cask "microsoft-teams"
-cask "claude-code"
 brew "azcopy"
 brew "azure-cli"
 brew "ankitpokhrel/jira-cli/jira-cli"
