@@ -63,6 +63,7 @@ brew "awscli"
 brew "poetry"
 brew "helm"
 cask "claude-code"
+cask "node"
 
 # Personal stuff
 
