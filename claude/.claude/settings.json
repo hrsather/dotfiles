@@ -37,5 +37,6 @@
     "command": "~/.claude/statusline.sh",
     "padding": 2
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "model": "sonnet"
 }
