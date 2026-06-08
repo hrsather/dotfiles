@@ -95,6 +95,8 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 defaults write com.apple.dock show-recents -bool false
 # Disable standard click to show desktop
 defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+# Set wallpaper
+osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$DOTFILES_DIR/assets/background.png\""
 # Disable pop up for special chars when typing
 defaults write -g ApplePressAndHoldEnabled -bool false
 # Set color theme to graphite

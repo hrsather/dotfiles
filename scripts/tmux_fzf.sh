@@ -12,6 +12,7 @@ selected="${HOME}/Repos/${session_name}"
 
 if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new-session -d -s "$session_name" -c "$selected"
+    tmux send-keys -t "$session_name":1 "nt" C-m
 fi
 
 tmux switch-client -t "$session_name"
