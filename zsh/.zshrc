@@ -45,7 +45,7 @@ alias cat="bat"
 alias ca="conda activate"
 alias cc="bash ~/dotfiles/scripts/conda_fzf.sh"
 alias tma="tmux attach"
-alias nt="tmux rename-window -t 1 Code && tmux new-window -n Shell && tmux select-window -t Code && n"
+alias nt="tmux rename-window -t 1 Code && tmux new-window -n Shell && tmux new-window -n Claude && tmux send-keys -t Claude 'claude --dangerously-skip-permissions' Enter && tmux select-window -t Code && n"
 alias k="kubectl"
 
 export BAT_THEME="Nord"
@@ -89,11 +89,6 @@ if [[ -d "$skills_dir" ]]; then
     skill_name=$(basename "$skill")
     ln -sfn "$skill" ~/.agents/skills/"$skill_name"
   done
-fi
-
-# zoxide
-if [[ -o interactive ]]; then
-  eval "$(zoxide init --cmd cd zsh)"
 fi
 
 # powerlevel10k

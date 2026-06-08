@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/opt/homebrew/bin/fd *)",
+      "Bash(bash /Users/hayden/Repos/dotfiles/scripts/tmux_fzf.sh)",
+      "Bash(tmux *)"
+    ]
+  }
+}

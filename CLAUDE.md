@@ -4,7 +4,7 @@ This is a macOS dotfiles repo managed with GNU Stow. Each top-level directory (e
 
 ## Critical: NEVER write to ~
 
-Config files in `~` are **symlinks** pointing back to this repo. NEVER create, edit, or mkdir anything under `~/` directly. All changes go in this repo at `/Users/hsather/dotfiles/`. The symlinks handle the rest. This includes `~/.claude/` — edit `claude/.claude/` in this repo instead.
+Config files in `~` are **symlinks** pointing back to this repo. NEVER create, edit, or mkdir anything under `~/` directly. All changes go in this repo at `~/Repos/dotfiles/`. The symlinks handle the rest. This includes `~/.claude/` — edit `claude/.claude/` in this repo instead.
 
 ## Structure
 

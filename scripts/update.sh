@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 # Ask for sudo upfront
 sudo -v
 
@@ -20,7 +22,7 @@ fi
 brew update
 brew upgrade
 brew upgrade --cask --greedy
-brew bundle --file ~/dotfiles/assets/Brewfile --force --cleanup
+brew bundle --file "$DOTFILES_DIR/assets/Brewfile" --force --cleanup
 brew cu --all --force
 brew autoremove
 brew cleanup
@@ -30,44 +32,43 @@ brew cleanup
 /usr/bin/python3 -m pip install neovim
 
 # Create dir for conda envs so they don't get overwritten on update
-conda config --add envs_dirs $HOME/.conda/envs
+conda config --add envs_dirs "$HOME/.conda/envs"
 
 # Update nvim packages
 nvim --headless "+lua vim.pack.update()" +qa
 
-# Load configs
+# Stow all packages
 packages=("zsh" "tmux" "btop" "nvim" "ghostty" "aerospace" "karabiner" "hushlogin" "git" "ruff" "lazygit" "claude")
-DOTFILES_DIR="${HOME}/dotfiles"
 for package in "${packages[@]}"; do
-    stow --dir="$DOTFILES_DIR" "$package"
+    stow --dir="$DOTFILES_DIR" --target="$HOME" --restow "$package"
 done
 
-# Fix lazygit install location
+# Fix lazygit install location (Library path has spaces, can't use stow)
 mkdir -p "${HOME}/Library/Application Support/lazygit/"
 rm -f "${HOME}/Library/Application Support/lazygit/config.yml"
-ln -s "${HOME}/dotfiles/lazygit/.config/lazygit/config.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
+ln -s "$DOTFILES_DIR/lazygit/.config/lazygit/config.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
 
 # Install/Update OpenSpec
 npm install -g @fission-ai/openspec@latest
 
 # Source tmux
-tmux source-file ~/.tmux.conf
+tmux source-file ~/.config/tmux/tmux.conf
 
 # Update submodules
-git submodule update --init --recursive
-git submodule update --remote --recursive
+git -C "$DOTFILES_DIR" submodule update --init --recursive
+git -C "$DOTFILES_DIR" submodule update --remote --recursive
 
 # Update Firefox
 PROFILES_PATH="${HOME}/Library/Application Support/Firefox/Profiles/"
 PROFILE=$(ls -t "$PROFILES_PATH" | grep '\.default-release' | head -1)
 PROFILE_PATH="${PROFILES_PATH}${PROFILE}"
 mkdir -p "${PROFILE_PATH}/chrome"
-FIREFOX_DIR="${HOME}/dotfiles/firefox"
+FIREFOX_DIR="$DOTFILES_DIR/firefox"
 rm -f "$PROFILE_PATH/user.js"
 cp "$FIREFOX_DIR/user.js" "$PROFILE_PATH/user.js"
 ln -sf "$(realpath "$FIREFOX_DIR/userChrome.css")" "$PROFILE_PATH/chrome/userChrome.css"
 cp "$FIREFOX_DIR/userContent.css" "$PROFILE_PATH/chrome/userContent.css"
-cp "${HOME}/dotfiles/assets/background.png" "$PROFILE_PATH/chrome/background.png"
+cp "$DOTFILES_DIR/assets/background.png" "$PROFILE_PATH/chrome/background.png"
 
 # Mac settings
 # Auto-hide scrollbars

@@ -6,9 +6,9 @@
 
 [core]
     ignorecase = false
-    excludesFile = ~/dotfiles/git/.gitignore_global
+    excludesFile = ~/Repos/dotfiles/git/.gitignore_global
 [git]
 	name = Hayden Sather
 [user]
 	name = Hayden Sather
-	email = hsather@axon.com
+	email = hrsather@gmail.com
