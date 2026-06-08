@@ -1,5 +1,6 @@
 btop/.config/btop/btop.log
 nvim/.config/nvim/lazy-lock.json
+.claude/settings.local.json
 
 # Override global gitignore — this repo manages claude config
 !**/CLAUDE.md
@@ -9,6 +10,11 @@ nvim/.config/nvim/lazy-lock.json
 # OpenSpec-managed (regenerated automatically)
 .claude/commands/opsx/
 .claude/skills/openspec-*
+
+# AI skills symlinked from external repo (machine-local, not tracked)
+claude/.claude/skills/*
+!claude/.claude/skills/babysit
+!claude/.claude/skills/babysit/**
 
 
 # Credentials
