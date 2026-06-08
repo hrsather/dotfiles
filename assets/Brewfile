@@ -65,9 +65,6 @@ brew "helm"
 cask "claude-code"
 
 # Personal stuff
-# cask "proton-mail"
-# brew "aws-cdk"
-# brew "kubectl"
 
 # Work stuff
 cask "microsoft-azure-storage-explorer"
