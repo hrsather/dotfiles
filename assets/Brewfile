@@ -19,6 +19,7 @@ cask "qview"
 cask "iina"
 cask "miniconda"
 cask "slack"
+cask "claude"
 
 brew "tmux"
 brew "fd"
