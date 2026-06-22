@@ -22,8 +22,13 @@ fi
 brew update
 brew upgrade
 brew upgrade --cask --greedy
-brew bundle --file "$DOTFILES_DIR/assets/Brewfile" --force --cleanup
-brew cu --all --force
+brew trust hashicorp/tap
+brew trust ankitpokhrel/jira-cli
+brew trust buo/cask-upgrade
+brew trust nikitabobko/tap
+brew trust dimentium/autoraise
+brew bundle --file "$DOTFILES_DIR/assets/Brewfile" --force
+brew cu --all --force --yes
 brew autoremove
 brew cleanup
 
@@ -48,8 +53,12 @@ mkdir -p "${HOME}/Library/Application Support/lazygit/"
 rm -f "${HOME}/Library/Application Support/lazygit/config.yml"
 ln -s "$DOTFILES_DIR/lazygit/.config/lazygit/config.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
 
+# Update npm and global packages
+npm install -g npm@latest
+npm update -g
+
 # Install/Update OpenSpec
-npm install -g @fission-ai/openspec@latest
+npm install -g --allow-scripts=@fission-ai/openspec @fission-ai/openspec@latest
 
 # Source tmux
 tmux source-file ~/.config/tmux/tmux.conf
