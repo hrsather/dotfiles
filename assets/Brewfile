@@ -63,6 +63,7 @@ brew "kustomize"
 brew "awscli"
 brew "poetry"
 brew "helm"
+brew "argocd"
 cask "claude-code"
 brew "node"
 
