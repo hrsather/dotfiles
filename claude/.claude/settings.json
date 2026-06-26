@@ -32,12 +32,12 @@
       "Bash(git clean -f*)"
     ]
   },
-  "model": "sonnet",
+  "model": "opusplan",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh",
     "padding": 2
   },
-  "skipDangerousModePermissionPrompt": true,
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true
 }
