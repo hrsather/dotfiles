@@ -84,12 +84,25 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # trash-cli
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
-# Claude skills from ai-skills repo
-if [[ -d "$skills_dir" ]]; then
-  for skill in "$skills_dir"/*(/N); do
-    skill_name=$(basename "$skill")
-    ln -sfn "$skill" ~/.agents/skills/"$skill_name"
+# Agent skills — AI_SKILLS_DIRS is a comma-separated list of skill source dirs
+mkdir -p ~/.agents/skills
+for _skill in "$HOME/Repos/dotfiles/personal-skills"/*(/N); do
+  ln -sfn "$_skill" ~/.agents/skills/"$(basename "$_skill")"
+done
+_skill_sources="${AI_SKILLS_DIRS:-$AI_SKILLS_DIR}"
+if [[ -n "$_skill_sources" ]]; then
+  IFS=',' read -rA _skill_dirs <<< "$_skill_sources"
+  for _dir in "${_skill_dirs[@]}"; do
+    _dir="${${_dir## }%% }"
+    if [[ -d "$_dir" ]]; then
+      for _skill in "$_dir"/*(/N); do
+        ln -sfn "$_skill" ~/.agents/skills/"$(basename "$_skill")"
+      done
+    else
+      echo "[skills] warning: directory not found: $_dir" >&2
+    fi
   done
+  unset _skill_sources _skill_dirs _dir _skill
 fi
 
 # powerlevel10k
