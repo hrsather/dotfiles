@@ -5,6 +5,8 @@ autoload -Uz compinit
 compinit
 # OPENSPEC:END
 
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
 printf '\n%.0s' {1..100}
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -83,7 +85,6 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
 # Claude skills from ai-skills repo
-export AI_SKILLS_DIR=~/Repos/ai-skills
 if [[ -d "$skills_dir" ]]; then
   for skill in "$skills_dir"/*(/N); do
     skill_name=$(basename "$skill")
@@ -125,5 +126,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
