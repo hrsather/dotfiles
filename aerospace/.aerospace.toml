@@ -81,6 +81,10 @@ start-at-login = true
     run = ['move-node-to-workspace 8']
 
 [[on-window-detected]]
+    if.app-id = 'com.anthropic.claudefordesktop'
+    run = ['move-node-to-workspace 8']
+
+[[on-window-detected]]
     if.app-id = 'com.microsoft.StorageExplorer'
     run = ['move-node-to-workspace 9']
 
