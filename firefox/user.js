@@ -73,6 +73,7 @@ user_pref("browser.newtabpage.activity-stream.showWeather", false);
 user_pref("browser.newtabpage.activity-stream.system.showWeather", false);
 user_pref("browser.newtabpage.activity-stream.feeds.weatherfeed", false);
 user_pref("browser.newtabpage.activity-stream.logowordmark.alwaysVisible", false);
+user_pref("browser.newtabpage.activity-stream.hideLogo", true); // Firefox 151+ new tab redesign
 user_pref("browser.newtabpage.activity-stream.newtabWallpapers.enabled", false);
 user_pref("browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled", false);
 user_pref("browser.newtabpage.activity-stream.showSections", false);
