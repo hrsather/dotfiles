@@ -1,5 +1,5 @@
 quitOnTopLevelReturn: true
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: "perl -X /opt/homebrew/bin/diff-so-fancy"
+      command: "perl -X /opt/homebrew/bin/diff-so-fancy"

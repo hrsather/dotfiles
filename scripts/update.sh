@@ -2,8 +2,15 @@
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-# Ask for sudo upfront
+# Ask for sudo upfront, then keep the credential cache alive for the
+# duration of this script so later steps (e.g. cask launchctl removal)
+# don't prompt for the password again. tty_tickets means this only
+# covers sudo calls sharing this script's tty - subprocesses spawned
+# on a different tty (some brew cask installers) can still prompt.
 sudo -v
+while true; do sudo -n true; sleep 30; kill -0 "$$" || exit; done 2>/dev/null &
+SUDO_KEEPALIVE_PID=$!
+trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null' EXIT
 
 # Update other software
 sudo softwareupdate -i -a
@@ -20,8 +27,8 @@ fi
 
 # Update brew packages
 brew update
-brew upgrade
-brew upgrade --cask --greedy
+brew upgrade --no-ask
+brew upgrade --cask --greedy --no-ask
 brew trust hashicorp/tap
 brew trust ankitpokhrel/jira-cli
 brew trust buo/cask-upgrade

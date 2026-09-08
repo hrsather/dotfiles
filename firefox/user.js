@@ -28,6 +28,7 @@ user_pref("reader.parse-on-load.enabled", false);
 user_pref("accessibility.force_disabled", 1);
 user_pref("pdfjs.defaultZoomValue", "page-width");
 user_pref("app.update.auto", false);
+user_pref("app.update.background.scheduling.enabled", false);
 
 /** URL BAR ***/
 user_pref("browser.urlbar.suggest.history", false);

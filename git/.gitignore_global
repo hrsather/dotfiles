@@ -1,5 +1,4 @@
 .Session.vim
-CLAUDE.md
 openspec/
 .claude/*
 !.claude/skills
