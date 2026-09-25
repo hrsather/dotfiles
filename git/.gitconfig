@@ -11,11 +11,4 @@
 	name = Hayden Sather
 [user]
 	name = Hayden Sather
-	email = hsather@axonengineering.io
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-[http "https://lfs.github.com"]
-	sslVerify = false
+	email = hrsather@proton.me

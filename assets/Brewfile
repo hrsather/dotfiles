@@ -68,10 +68,8 @@ cask "claude-code"
 brew "node"
 
 # Personal stuff
+brew "aws-cdk"
+cask "wifiman"
+cask "dbeaver-community"
 
 # Work stuff
-cask "microsoft-azure-storage-explorer"
-cask "microsoft-teams"
-brew "azcopy"
-brew "azure-cli"
-brew "ankitpokhrel/jira-cli/jira-cli"
