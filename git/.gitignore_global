@@ -1,7 +1,4 @@
 .Session.vim
 openspec/
-.claude/*
-!.claude/skills
-!.claude/skills/**
 
 **/.claude/settings.local.json
