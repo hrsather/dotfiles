@@ -8,7 +8,11 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # covers sudo calls sharing this script's tty - subprocesses spawned
 # on a different tty (some brew cask installers) can still prompt.
 sudo -v
-while true; do sudo -n true; sleep 30; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do
+    sudo -n true
+    sleep 30
+    kill -0 "$$" || exit
+done 2>/dev/null &
 SUDO_KEEPALIVE_PID=$!
 trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null' EXIT
 
@@ -30,7 +34,6 @@ brew update
 brew upgrade --no-ask
 brew upgrade --cask --greedy --no-ask
 brew trust hashicorp/tap
-brew trust ankitpokhrel/jira-cli
 brew trust buo/cask-upgrade
 brew trust nikitabobko/tap
 brew trust dimentium/autoraise
