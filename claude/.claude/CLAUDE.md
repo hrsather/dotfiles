@@ -9,6 +9,9 @@
 - Branch names must be prefixed with `feature/` or `fix/`
 - Use `git commit -m "message"` — never use heredocs or command substitution in commit commands
 
+## Pull requests
+- After every `gh pr create`, and after every commit or push to a branch with an open PR, run the `pr-review-loop` skill. It holds a per-PR lock, so invoking it again while it is running is harmless.
+
 ## Shell
 - Create bash scripts that will work on MacOS's bash
 - Prefer rg over grep and fd over find for repository searches.

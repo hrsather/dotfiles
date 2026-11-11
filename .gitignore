@@ -12,8 +12,6 @@ nvim/.config/nvim/lazy-lock.json
 
 # AI skills symlinked from external repo (machine-local, not tracked)
 claude/.claude/skills/*
-!claude/.claude/skills/babysit
-!claude/.claude/skills/babysit/**
 
 
 # Credentials
