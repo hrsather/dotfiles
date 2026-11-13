@@ -14,7 +14,7 @@
 ## Tasks
 - For any non-trivial change, follow the `ship` skill. It orders the skills below and says when to stop.
 - Invest in the spec up front. After I approve it, decide things yourself within its Authority section and log the decisions; unblock yourself before involving anyone.
-- Don't contact me or anyone else until the PR is green (including any extra green criteria in the Work rules below), unless green is unreachable. Questions go to me first as a Slack DM plus a push notification; anyone else only via the `unblock` skill's drafts, which I send.
+- Don't contact me or anyone else until the PR is green (including any extra green criteria in the Work rules below), unless green is unreachable. Questions go to me first as a push notification, with the details in the terminal (never a Slack DM: those post as me and don't notify); anyone else only via the `unblock` skill's drafts, which I send.
 - Before starting a non-trivial change, run the `grill-me` skill to write `SPEC-<worktree>.md`. If the spec leaves a real design choice open, run `propose-options` before building.
 - Before I `/clear` or when context gets long mid-task, run the `handoff` skill.
 - When a task is complete (PR merged, deploy verified if there is one), append its line to `$SHIP_LOG` (see the `ship` skill), then clean up: delete its `SPEC-` and `HANDOFF-` files, leave and remove the worktree with `ExitWorktree` if it has no uncommitted changes, and delete the merged local branch.

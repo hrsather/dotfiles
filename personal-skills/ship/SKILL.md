@@ -16,7 +16,7 @@ One workstream per session, in its own worktree. The spec is where the user spen
 4. **Build and test.** Implement in small commits. For each "done when" item, write or extend an automated test where the repo has tests, and run it. Follow the Debugging rules when something fails. Exit: every Verification item in the spec has been run and passed, with output seen this session.
 5. **Review.** Run `pre-push-review`, then push (the pre-push hook runs the repo's checks) and open the PR. Exit: PR open.
 6. **Get to green.** Run `pr-review-loop`, plus any repo-specific green checks from CLAUDE.md. Exit: green, as defined below.
-7. **Reach out.** Now, and not before: send the user one Slack DM with the decisions log and any open questions, then run the repo's human-gated skill if CLAUDE.md names one, or ask the user to review and merge. Exit: merged, deployed, and verified in the live environment where there is one.
+7. **Reach out.** Now, and not before: print the decisions log and any open questions in the terminal and send the user one push notification, then run the repo's human-gated skill if CLAUDE.md names one, or ask the user to review and merge. Exit: merged, deployed, and verified in the live environment where there is one.
 8. **Log.** If `$SHIP_LOG` is set, append one JSON line to it (`echo '<json>' >> "$SHIP_LOG"`), filled from this session and the spec:
    ```
    {"date":"YYYY-MM-DD","repo":"owner/name","pr":"<url>","outcome":"shipped|abandoned|handed-off",
@@ -47,9 +47,9 @@ When stuck, unblock yourself before involving anyone: search the code, docs and 
 ## Reaching out
 
 - **Not before green.** Don't message the user or anyone else until the PR is green. Questions that come up earlier go under `## Open questions` in the spec; keep working on your best answer and revisit if the answer changes things.
-- **One exception:** if green is unreachable (blocked on access, someone else's outage, or a question outside your authority with no work left that doesn't depend on it), DM the user. Say what you tried and what you need, and never contact anyone else first.
-- **Questions go to the user first, on Slack:** DM with `slack_send_message` to the user's own id, plus a push notification with the PushNotification tool. Contacting anyone else goes through `unblock`, which drafts the message for the user to send.
-- **Replies:** you aren't notified of Slack replies. After sending, continue with other work. At each stage boundary, and before stopping, read the DM thread with `slack_read_thread`. If nothing is left to do, say in the terminal that you're waiting and that the user can reply either there or in the thread.
+- **One exception:** if green is unreachable (blocked on access, someone else's outage, or a question outside your authority with no work left that doesn't depend on it), notify the user. Say what you tried and what you need, and never contact anyone else first.
+- **Questions go to the user first, by push notification:** write the full question in the terminal, then send a push notification with the PushNotification tool (under 200 characters, leading with what they need to do). Don't DM the user on Slack: the Slack tools post as the user, so they never get notified. Contacting anyone else goes through `unblock`, which drafts the message for the user to send.
+- **Replies:** the user answers in the terminal. After notifying, continue with other work. If nothing is left to do, say in the terminal that you're waiting.
 
 Before the user clears context or the session ends, run `handoff`.
 
