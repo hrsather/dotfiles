@@ -5,7 +5,9 @@
 #   acquire                      take the per-PR lock (exit 3 if another loop is running)
 #   release                      drop the lock and state
 #   bump                         count a loop (exit 4 once it passes PR_REVIEW_MAX_LOOPS)
+#   reviewers                    detect whether the repo has AI reviewers; prints {ai_reviewers, evidence}
 #   wait [head-sha]              block until the AI review checks finish, then print findings
+#                                (returns right away when the repo has no AI reviewers)
 #   findings                     print unhandled AI and human comments as JSON
 #   reply <thread-id> <body>     reply on a review thread
 #   resolve <thread-id>          resolve a review thread
@@ -25,6 +27,10 @@ SETTLE_SECS=${PR_REVIEW_SETTLE_SECS:-20}
 AI_RE=${PR_REVIEW_AI_LOGINS:-'copilot|claude|coderabbit|codex|gemini|sourcery|code-review|ai-review|review-plusone'}
 IGNORE_RE=${PR_REVIEW_IGNORE_LOGINS:-'snyk|infracost|github-actions|jenkins|dependabot|renovate|pullotter|kyverno|sonar|codecov|release-please|argocd'}
 REVIEW_CHECK_RE=${PR_REVIEW_CHECKS:-'review'}
+# Config files and workflow contents that mean an AI reviewer is set up.
+AI_FILES_RE=${PR_REVIEW_AI_FILES:-'^(\.coderabbit\.ya?ml|\.gemini/|\.sourcery\.ya?ml|\.codex/|\.cursor/BUGBOT\.md|\.github/copilot-code-review)'}
+AI_WORKFLOW_RE=${PR_REVIEW_AI_WORKFLOWS:-'anthropics/claude-code-action|coderabbit|openai/codex-action|gemini-code-assist|google-github-actions/run-gemini-cli|copilot.*review|ai-review|pr-agent'}
+HISTORY_PRS=${PR_REVIEW_HISTORY_PRS:-20}
 MARKER='<!-- pr-review-loop -->'
 
 die() { echo "pr-review: $1" >&2; exit "${2:-1}"; }
@@ -139,17 +145,70 @@ def unseen($id): ($handled | index($id)) == null;
 }'
 }
 
+# Evidence that an AI reviewer is set up, one line per signal. Checks, in order:
+# Copilot auto-review in the base branch's rules, reviewer config files and workflows on the
+# base branch, and AI-authored reviews or comments on the repo's recent PRs (catches GitHub
+# Apps like CodeRabbit that need no config file).
+reviewer_evidence() {
+    local base paths p content
+    base=$(gh pr view "$PR_URL" --json baseRefName --jq .baseRefName)
+
+    gh api --hostname "$HOST" "repos/$OWNER/$REPO/rules/branches/$base" --jq '.[].type' 2>/dev/null \
+        | grep -qx 'copilot_code_review' && echo "branch rule: copilot_code_review on $base"
+
+    paths=$(gh api --hostname "$HOST" "repos/$OWNER/$REPO/git/trees/$base?recursive=1" --jq '.tree[].path' 2>/dev/null || true)
+    echo "$paths" | grep -E "$AI_FILES_RE" | sed 's/^/config file: /' | head -n 5 || true
+    for p in $(echo "$paths" | grep -E '^\.github/workflows/[^/]+\.ya?ml$' || true); do
+        content=$(gh api --hostname "$HOST" "repos/$OWNER/$REPO/contents/$p?ref=$base" --jq .content 2>/dev/null | base64 --decode 2>/dev/null || true)
+        echo "$content" | grep -qiE "$AI_WORKFLOW_RE" && echo "workflow: $p"
+    done
+
+    gh api graphql --hostname "$HOST" -F owner="$OWNER" -F name="$REPO" -F n="$HISTORY_PRS" -f query='
+query($owner: String!, $name: String!, $n: Int!) {
+  repository(owner: $owner, name: $name) {
+    pullRequests(last: $n) {
+      nodes {
+        reviews(first: 20) { nodes { author { login } } }
+        comments(first: 50) { nodes { author { login } body } }
+      }
+    }
+  }
+}' 2>/dev/null | jq -r --arg ai "$AI_RE" --arg marker "$MARKER" '
+        [.data.repository.pullRequests.nodes[]
+         | (.reviews.nodes[] | .author.login // ""),
+           (.comments.nodes[] | select((.body // "") | contains($marker) | not) | .author.login // "")
+         | select(test($ai; "i"))]
+        | unique | .[] | "history: \(.) reviewed or commented on a recent PR"' || true
+}
+
+cmd_reviewers() {
+    load_pr
+    local cache="$STATE_DIR/reviewers" evidence
+    if [ -f "$cache" ]; then cat "$cache"; return; fi
+    evidence=$(reviewer_evidence | jq -R . | jq -sc 'map(select(. != ""))')
+    local out
+    out=$(jq -nc --argjson e "$evidence" '{ai_reviewers: ($e | length > 0), evidence: $e}')
+    [ -d "$STATE_DIR" ] && echo "$out" > "$cache"
+    echo "$out"
+}
+
 cmd_wait() {
     load_pr
     need_lock
     local expect=${1:-} start info head counts pending total now
+    if [ "$(cmd_reviewers | jq -r .ai_reviewers)" != "true" ]; then
+        echo "pr-review: no AI reviewers detected for $OWNER/$REPO; not waiting (see: pr-review.sh reviewers)" >&2
+        cmd_findings
+        return
+    fi
     start=$(date +%s)
     while :; do
         beat
         info=$(gh pr view "$PR_URL" --json headRefOid,statusCheckRollup)
         head=$(echo "$info" | jq -r .headRefOid)
         now=$(( $(date +%s) - start ))
-        if [ -z "$expect" ] || [ "$head" = "$expect" ]; then
+        # Accept a short sha: compare against the same-length prefix of the full head.
+        if [ -z "$expect" ] || [ "${head:0:${#expect}}" = "$expect" ]; then
             counts=$(echo "$info" | jq -r --arg re "$REVIEW_CHECK_RE" '
                 def nm: .name // .context // "";
                 def pend: if .__typename == "CheckRun" then .status != "COMPLETED" else (.state == "PENDING" or .state == "EXPECTED") end;
@@ -202,12 +261,13 @@ cmd_mark_handled() {
 }
 
 cmd=${1:-}
-[ -n "$cmd" ] || die "usage: pr-review.sh acquire|release|bump|wait|findings|reply|resolve|comment|mark-handled" 2
+[ -n "$cmd" ] || die "usage: pr-review.sh acquire|release|bump|reviewers|wait|findings|reply|resolve|comment|mark-handled" 2
 shift
 case "$cmd" in
     acquire) cmd_acquire ;;
     release) cmd_release ;;
     bump) cmd_bump ;;
+    reviewers) cmd_reviewers ;;
     wait) cmd_wait "$@" ;;
     findings) cmd_findings ;;
     reply) cmd_reply "$@" ;;

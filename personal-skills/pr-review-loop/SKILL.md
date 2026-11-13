@@ -24,7 +24,7 @@ Helper: `~/.claude/skills/pr-review-loop/pr-review.sh` (called `PR` below). Run 
 
 1. **Find the PR.** `gh pr view --json url`. No PR: stop.
 2. **Lock.** `PR acquire`. Exit 3: stop silently.
-3. **Wait for the AI review.** Run `PR wait <head-sha>` with `run_in_background: true`, where the sha is `git rev-parse HEAD` of what you pushed (make sure it is pushed). It blocks until the AI review checks finish, up to 25 minutes, and prints findings as JSON. Don't poll it: act when it completes, then read its output file.
+3. **Wait for the AI review.** Run `PR reviewers` first. It reports whether the repo has any AI reviewer: Copilot auto-review in the base branch's rules, reviewer config files or workflows, or AI-authored reviews and comments on recent PRs. If `ai_reviewers` is `false`, don't wait: say so in the report and gate on CI alone (step 5). Otherwise run `PR wait <head-sha>` with `run_in_background: true`, where the sha is `git rev-parse HEAD` of what you pushed (make sure it is pushed; short shas work too). It blocks until the AI review checks finish, up to 25 minutes, and prints findings as JSON. Don't poll it: act when it completes, then read its output file.
 4. **Count the round.** `PR bump`. Exit 4: `PR release` and go to the report.
 5. **Check CI.** `gh pr checks <url> --required --json name,state,link`. If required checks are still pending and there is nothing in `ai_threads` or `ai_comments`, run `gh pr checks <url> --required --watch` with `run_in_background: true` and check again when it finishes.
 6. **Triage** the JSON and the failed checks (see below). No AI items and no failed checks: `PR release` and go to the report.
@@ -62,7 +62,7 @@ Fixed: <n> (<commit shas>)
 CI: <passing | failures fixed | failing, not caused by this PR: <checks>>
 Declined and resolved: <n>
 Left for you: <human comments and undecided items, with links>
-Stopped because: no more AI comments | hit the 5 round cap | another loop was running
+Stopped because: no more AI comments | no AI reviewers on this repo | hit the 5 round cap | another loop was running
 ```
 
 If the cap ended it, say so plainly and don't try to address anything further.
@@ -72,4 +72,5 @@ If the cap ended it, say so plainly and don't try to address anything further.
 - Items are classified by author. AI reviewers match `PR_REVIEW_AI_LOGINS` (default includes copilot, claude, coderabbit; add others via the env var). CI bots (snyk, infracost, jenkins, github-actions, ...) are ignored. Everyone else is human. Comments this skill posts end with a hidden marker, so it never mistakes its own replies for a human's.
 - Lock and counters live in `${TMPDIR:-/tmp}/pr-review-loop/`. A lock with no activity for 2 hours is treated as stale and taken over.
 - Reads the first 100 threads and comments per PR.
+- `PR reviewers` is cached per PR in the state dir. Its detection lists are tunable with `PR_REVIEW_AI_FILES`, `PR_REVIEW_AI_WORKFLOWS` and `PR_REVIEW_HISTORY_PRS`.
 - Other env knobs: `PR_REVIEW_MAX_LOOPS`, `PR_REVIEW_WAIT_TIMEOUT`, `PR_REVIEW_CHECKS` (regex for which checks count as AI review), `PR_REVIEW_IGNORE_LOGINS`.
