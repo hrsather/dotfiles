@@ -60,7 +60,8 @@ toolbarspring {
     transition: opacity 0.3s;
 }
 
-#nav-bar:hover {
+#nav-bar:hover,
+#nav-bar:focus-within {
     opacity: 1;
 }
 
