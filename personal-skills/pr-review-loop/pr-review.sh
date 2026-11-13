@@ -22,9 +22,9 @@ WAIT_TIMEOUT=${PR_REVIEW_WAIT_TIMEOUT:-1500}
 POLL_SECS=${PR_REVIEW_POLL_SECS:-30}
 START_GRACE=${PR_REVIEW_START_GRACE:-180}
 SETTLE_SECS=${PR_REVIEW_SETTLE_SECS:-20}
-AI_RE=${PR_REVIEW_AI_LOGINS:-'spockulus|copilot|claude|coderabbit|codex|gemini|sourcery|code-review|ai-review|review-plusone'}
+AI_RE=${PR_REVIEW_AI_LOGINS:-'copilot|claude|coderabbit|codex|gemini|sourcery|code-review|ai-review|review-plusone'}
 IGNORE_RE=${PR_REVIEW_IGNORE_LOGINS:-'snyk|infracost|github-actions|jenkins|dependabot|renovate|pullotter|kyverno|sonar|codecov|release-please|argocd'}
-REVIEW_CHECK_RE=${PR_REVIEW_CHECKS:-'review|spockulus'}
+REVIEW_CHECK_RE=${PR_REVIEW_CHECKS:-'review'}
 MARKER='<!-- pr-review-loop -->'
 
 die() { echo "pr-review: $1" >&2; exit "${2:-1}"; }

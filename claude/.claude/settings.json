@@ -41,14 +41,60 @@
       "Bash(git push -f *)",
       "Bash(git reset --hard*)",
       "Bash(git checkout -- *)",
-      "Bash(git clean -f*)"
+      "Bash(git clean -f*)",
+      "Bash(gh pr merge*--admin*)",
+      "Bash(terraform*apply*)",
+      "Bash(terraform*destroy*)",
+      "Bash(terragrunt*apply*)",
+      "Bash(terragrunt*destroy*)",
+      "Bash(az * delete*)",
+      "Bash(aws * delete-*)",
+      "Bash(aws * terminate-*)",
+      "Bash(kubectl delete*)"
     ]
   },
-  "model": "opusplan",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-start-handoff.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git *)",
+            "command": "~/.claude/hooks/pre-push-checks.sh",
+            "timeout": 600,
+            "statusMessage": "Running pre-push checks..."
+          }
+        ]
+      }
+    ]
+  },
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh",
     "padding": 2
+  },
+  "enabledPlugins": {
+    "ai-skills@ai-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "ai-skills": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/hsather/Repos/ai-skills"
+      }
+    }
   },
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,

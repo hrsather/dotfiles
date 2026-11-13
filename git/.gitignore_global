@@ -2,3 +2,6 @@
 openspec/
 
 **/.claude/settings.local.json
+**/.claude/worktrees/
+SPEC-*.md
+HANDOFF-*.md

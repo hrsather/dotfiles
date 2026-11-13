@@ -58,7 +58,8 @@ for package in "${packages[@]}"; do
     stow --dir="$DOTFILES_DIR" --target="$HOME" --restow "$package"
 done
 
-for skill in "$DOTFILES_DIR/personal-skills"/*/; do
+for skill in "$DOTFILES_DIR/personal-skills"/*/ "$HOME/Repos/dotfiles-axon/skills"/*/; do
+    [ -d "$skill" ] || continue
     ln -sfn "$skill" "$HOME/.agents/skills/$(basename "$skill")"
 done
 ln -sfn "$HOME/.agents/skills" "$HOME/.claude/skills"
