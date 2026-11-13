@@ -69,4 +69,6 @@ brew "pnpm"
 cask "microsoft-teams"
 brew "azcopy"
 brew "azure-cli"
-
+brew "aws-cdk"
+cask "wifiman"
+cask "dbeaver-community"
