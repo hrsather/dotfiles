@@ -32,6 +32,11 @@ if [ -f .pre-commit-config.yaml ] && command -v pre-commit >/dev/null; then
 fi
 
 if [ -f package.json ]; then
+    # Use the Node major the repo pins in .nvmrc when Homebrew has it as node@<major>.
+    if [ -f .nvmrc ]; then
+        node_bin="/opt/homebrew/opt/node@$(tr -d '[:space:]v' < .nvmrc)/bin"
+        [ -d "$node_bin" ] && PATH="$node_bin:$PATH"
+    fi
     pm=npm
     [ -f pnpm-lock.yaml ] && pm=pnpm
     for s in format:check lint typecheck test; do
