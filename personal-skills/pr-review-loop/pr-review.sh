@@ -28,7 +28,8 @@ AI_RE=${PR_REVIEW_AI_LOGINS:-'copilot|claude|coderabbit|codex|gemini|sourcery|co
 IGNORE_RE=${PR_REVIEW_IGNORE_LOGINS:-'snyk|infracost|github-actions|jenkins|dependabot|renovate|pullotter|kyverno|sonar|codecov|release-please|argocd'}
 REVIEW_CHECK_RE=${PR_REVIEW_CHECKS:-'review'}
 # Config files and workflow contents that mean an AI reviewer is set up.
-AI_FILES_RE=${PR_REVIEW_AI_FILES:-'^(\.coderabbit\.ya?ml|\.gemini/|\.sourcery\.ya?ml|\.codex/|\.cursor/BUGBOT\.md|\.github/copilot-code-review)'}
+# Matched against root-level names only.
+AI_FILES_RE=${PR_REVIEW_AI_FILES:-'^(\.coderabbit\.ya?ml|\.sourcery\.ya?ml|\.pr_agent\.toml)$'}
 AI_WORKFLOW_RE=${PR_REVIEW_AI_WORKFLOWS:-'anthropics/claude-code-action|coderabbit|openai/codex-action|gemini-code-assist|google-github-actions/run-gemini-cli|copilot.*review|ai-review|pr-agent'}
 HISTORY_PRS=${PR_REVIEW_HISTORY_PRS:-20}
 MARKER='<!-- pr-review-loop -->'
@@ -149,21 +150,44 @@ def unseen($id): ($handled | index($id)) == null;
 # Copilot auto-review in the base branch's rules, reviewer config files and workflows on the
 # base branch, and AI-authored reviews or comments on the repo's recent PRs (catches GitHub
 # Apps like CodeRabbit that need no config file).
+# GET a REST path. A 404, or a 403 because the plan lacks the feature (rulesets on free private
+# repos), counts as "nothing there" (empty output). Any other failure prints an "error:" line,
+# which makes the result fail open (see cmd_reviewers).
+api_get() {
+    local errf out
+    errf=$(mktemp)
+    if out=$(gh api --hostname "$HOST" "$@" 2>"$errf"); then
+        rm -f "$errf"
+        printf '%s\n' "$out"
+        return 0
+    fi
+    grep -qE 'HTTP 404|Upgrade to GitHub Pro' "$errf" || echo "error: gh api $1: $(head -n 1 "$errf")"
+    rm -f "$errf"
+}
+
 reviewer_evidence() {
-    local base paths p content
-    base=$(gh pr view "$PR_URL" --json baseRefName --jq .baseRefName)
+    local base enc root p wf rules history
+    base=$(gh pr view "$PR_URL" --json baseRefName --jq .baseRefName) || { echo "error: base branch lookup failed"; return; }
+    enc=$(jq -rn --arg b "$base" '$b | @uri')
 
-    gh api --hostname "$HOST" "repos/$OWNER/$REPO/rules/branches/$base" --jq '.[].type' 2>/dev/null \
-        | grep -qx 'copilot_code_review' && echo "branch rule: copilot_code_review on $base"
+    rules=$(api_get "repos/$OWNER/$REPO/rules/branches/$enc" --jq '.[].type')
+    echo "$rules" | grep '^error:' || true
+    echo "$rules" | grep -qx 'copilot_code_review' && echo "branch rule: copilot_code_review on $base"
 
-    paths=$(gh api --hostname "$HOST" "repos/$OWNER/$REPO/git/trees/$base?recursive=1" --jq '.tree[].path' 2>/dev/null || true)
-    echo "$paths" | grep -E "$AI_FILES_RE" | sed 's/^/config file: /' | head -n 5 || true
-    for p in $(echo "$paths" | grep -E '^\.github/workflows/[^/]+\.ya?ml$' || true); do
-        content=$(gh api --hostname "$HOST" "repos/$OWNER/$REPO/contents/$p?ref=$base" --jq .content 2>/dev/null | base64 --decode 2>/dev/null || true)
-        echo "$content" | grep -qiE "$AI_WORKFLOW_RE" && echo "workflow: $p"
-    done
+    root=$(api_get "repos/$OWNER/$REPO/git/trees/$enc" --jq '.tree[].path')
+    echo "$root" | grep '^error:' || true
+    echo "$root" | grep -E "$AI_FILES_RE" | sed 's/^/config file: /' || true
 
-    gh api graphql --hostname "$HOST" -F owner="$OWNER" -F name="$REPO" -F n="$HISTORY_PRS" -f query='
+    if echo "$root" | grep -qx '\.github'; then
+        while IFS= read -r p; do
+            case "$p" in error:*) echo "$p"; continue ;; *.yml|*.yaml) ;; *) continue ;; esac
+            wf=$(api_get "repos/$OWNER/$REPO/contents/$p?ref=$enc" -H 'Accept: application/vnd.github.raw')
+            case "$wf" in error:*) echo "$wf"; continue ;; esac
+            if echo "$wf" | grep -qiE "$AI_WORKFLOW_RE"; then echo "workflow: $p"; break; fi
+        done <<< "$(api_get "repos/$OWNER/$REPO/contents/.github/workflows?ref=$enc" --jq '.[].path')"
+    fi
+
+    history=$(gh api graphql --hostname "$HOST" -F owner="$OWNER" -F name="$REPO" -F n="$HISTORY_PRS" -f query='
 query($owner: String!, $name: String!, $n: Int!) {
   repository(owner: $owner, name: $name) {
     pullRequests(last: $n) {
@@ -173,22 +197,29 @@ query($owner: String!, $name: String!, $n: Int!) {
       }
     }
   }
-}' 2>/dev/null | jq -r --arg ai "$AI_RE" --arg marker "$MARKER" '
+}') || { echo "error: PR history query failed"; return; }
+    echo "$history" | jq -r --arg ai "$AI_RE" --arg marker "$MARKER" '
         [.data.repository.pullRequests.nodes[]
          | (.reviews.nodes[] | .author.login // ""),
            (.comments.nodes[] | select((.body // "") | contains($marker) | not) | .author.login // "")
          | select(test($ai; "i"))]
-        | unique | .[] | "history: \(.) reviewed or commented on a recent PR"' || true
+        | unique | .[] | "history: \(.) reviewed or commented on a recent PR"'
 }
 
+# Fails open: if any lookup errored and nothing was found, report ai_reviewers=true (a wasted
+# wait costs a few minutes; a missed review defeats the skill) and don't cache the answer.
 cmd_reviewers() {
     load_pr
-    local cache="$STATE_DIR/reviewers" evidence
+    local cache="$STATE_DIR/reviewers" evidence out
     if [ -f "$cache" ]; then cat "$cache"; return; fi
     evidence=$(reviewer_evidence | jq -R . | jq -sc 'map(select(. != ""))')
-    local out
-    out=$(jq -nc --argjson e "$evidence" '{ai_reviewers: ($e | length > 0), evidence: $e}')
-    [ -d "$STATE_DIR" ] && echo "$out" > "$cache"
+    out=$(jq -nc --argjson e "$evidence" '
+        ($e | map(select(startswith("error:") | not))) as $hits
+        | ($e | map(select(startswith("error:")))) as $errors
+        | {ai_reviewers: (($hits | length) > 0 or ($errors | length) > 0), evidence: $hits, errors: $errors}')
+    if [ -d "$STATE_DIR" ] && [ "$(echo "$out" | jq '.errors | length')" -eq 0 ]; then
+        echo "$out" > "$cache"
+    fi
     echo "$out"
 }
 
@@ -196,6 +227,8 @@ cmd_wait() {
     load_pr
     need_lock
     local expect=${1:-} start info head counts pending total now
+    # Resolve short shas and refs locally so the comparison below is against a full sha.
+    [ -n "$expect" ] && expect=$(git rev-parse --verify --quiet "$expect^{commit}" 2>/dev/null || echo "$expect")
     if [ "$(cmd_reviewers | jq -r .ai_reviewers)" != "true" ]; then
         echo "pr-review: no AI reviewers detected for $OWNER/$REPO; not waiting (see: pr-review.sh reviewers)" >&2
         cmd_findings
@@ -207,8 +240,7 @@ cmd_wait() {
         info=$(gh pr view "$PR_URL" --json headRefOid,statusCheckRollup)
         head=$(echo "$info" | jq -r .headRefOid)
         now=$(( $(date +%s) - start ))
-        # Accept a short sha: compare against the same-length prefix of the full head.
-        if [ -z "$expect" ] || [ "${head:0:${#expect}}" = "$expect" ]; then
+        if [ -z "$expect" ] || [ "$head" = "$expect" ]; then
             counts=$(echo "$info" | jq -r --arg re "$REVIEW_CHECK_RE" '
                 def nm: .name // .context // "";
                 def pend: if .__typename == "CheckRun" then .status != "COMPLETED" else (.state == "PENDING" or .state == "EXPECTED") end;
