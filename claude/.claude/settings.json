@@ -1,102 +1,77 @@
 {
-  "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
-    "CLAUDE_CODE_ENHANCED_TELEMETRY_BETA": "1",
-    "OTEL_METRICS_EXPORTER": "otlp",
-    "OTEL_LOGS_EXPORTER": "otlp",
-    "OTEL_TRACES_EXPORTER": "otlp",
-    "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
-    "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4318",
-    "OTEL_METRIC_EXPORT_INTERVAL": "10000",
-    "OTEL_LOG_USER_PROMPTS": "1",
-    "OTEL_LOG_TOOL_DETAILS": "1"
-  },
-  "permissions": {
-    "allow": [
-      "Read",
-      "Grep",
-      "Glob",
-      "WebSearch",
-      "Bash(fd:*)",
-      "Bash(find:*)",
-      "Bash(head:*)",
-      "Bash(rg:*)",
-      "Bash(echo:*)",
-      "Bash(ls:*)",
-      "Bash(sort:*)",
-      "Bash(which *)",
-      "Bash(wc *)",
-      "Bash(brew list*)",
-      "Bash(brew info*)",
-      "Bash(git *)",
-      "Bash(gh *)",
-      "Bash(az *)",
-      "Bash(openspec *)",
-      "Bash(jira *)",
-      "WebFetch(domain:github.com)",
-      "Bash(rm *)"
-    ],
-    "deny": [
-      "Bash(git push --force*)",
-      "Bash(git push -f *)",
-      "Bash(git reset --hard*)",
-      "Bash(git checkout -- *)",
-      "Bash(git clean -f*)",
-      "Bash(gh pr merge*--admin*)",
-      "Bash(terraform*apply*)",
-      "Bash(terraform*destroy*)",
-      "Bash(terragrunt*apply*)",
-      "Bash(terragrunt*destroy*)",
-      "Bash(az * delete*)",
-      "Bash(aws * delete-*)",
-      "Bash(aws * terminate-*)",
-      "Bash(kubectl delete*)"
-    ]
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/session-start-handoff.sh"
-          }
+    "env": {
+        "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+        "CLAUDE_CODE_ENHANCED_TELEMETRY_BETA": "1",
+        "OTEL_METRICS_EXPORTER": "otlp",
+        "OTEL_LOGS_EXPORTER": "otlp",
+        "OTEL_TRACES_EXPORTER": "otlp",
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4318",
+        "OTEL_METRIC_EXPORT_INTERVAL": "10000",
+        "OTEL_LOG_USER_PROMPTS": "1",
+        "OTEL_LOG_TOOL_DETAILS": "1"
+    },
+    "permissions": {
+        "deny": [
+            "Bash(git push --force*)",
+            "Bash(git push -f *)",
+            "Bash(git checkout -- *)",
+            "Bash(git clean -f*)",
+            "Bash(gh pr merge*--admin*)",
+            "Bash(terraform*apply*)",
+            "Bash(terraform*destroy*)",
+            "Bash(terragrunt*apply*)",
+            "Bash(terragrunt*destroy*)",
+            "Bash(az * delete*)",
+            "Bash(aws * delete-*)",
+            "Bash(aws * terminate-*)",
+            "Bash(kubectl delete*)"
         ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "if": "Bash(git *)",
-            "command": "~/.claude/hooks/pre-push-checks.sh",
-            "timeout": 600,
-            "statusMessage": "Running pre-push checks..."
-          }
+    },
+    "model": "opus",
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "~/.claude/hooks/session-start-handoff.sh"
+                    }
+                ]
+            }
+        ],
+        "PreToolUse": [
+            {
+                "matcher": "Bash",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "~/.claude/hooks/pre-push-checks.sh",
+                        "if": "Bash(git *)",
+                        "timeout": 600,
+                        "statusMessage": "Running pre-push checks..."
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "model": "opus",
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh",
-    "padding": 2
-  },
-  "enabledPlugins": {
-    "ai-skills@ai-skills": true
-  },
-  "extraKnownMarketplaces": {
-    "ai-skills": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/hsather/Repos/ai-skills"
-      }
-    }
-  },
-  "tui": "fullscreen",
-  "skipDangerousModePermissionPrompt": true,
-  "agentPushNotifEnabled": true
+    },
+    "statusLine": {
+        "type": "command",
+        "command": "~/.claude/statusline.sh",
+        "padding": 2
+    },
+    "enabledPlugins": {
+        "ai-skills@ai-skills": true
+    },
+    "extraKnownMarketplaces": {
+        "ai-skills": {
+            "source": {
+                "source": "directory",
+                "path": "/Users/hsather/Repos/ai-skills"
+            }
+        }
+    },
+    "tui": "fullscreen",
+    "skipDangerousModePermissionPrompt": true,
+    "agentPushNotifEnabled": true
 }

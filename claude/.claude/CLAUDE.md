@@ -38,6 +38,8 @@
 ## Tips
 - To wait on a GitHub Actions run, run `gh run watch <id> --exit-status` in the background and act on its completion — don't poll `gh run list`/`gh run view` with sleep or ScheduleWakeup.
 - Because compound shell commands are disallowed, send independent Bash/Read calls (status checks, log fetches, file reads) as multiple tool calls in the same response instead of one per turn.
+- Inside an `EnterWorktree` session, git commands aimed at the main checkout (`git -C <main>`) are refused. To act on the main checkout (pull, branch cleanup), `ExitWorktree` with `action: "keep"`, run the command there, then re-enter with `EnterWorktree` `path` if more worktree work is left. Never hand that step back to me.
+- When a tool or the harness blocks a step, find the sanctioned way around it and do it. Hand it back to me only if none exists, and say exactly why.
 
 ## Work
 Work-specific rules live in a separate private repo, loaded only where it exists:
