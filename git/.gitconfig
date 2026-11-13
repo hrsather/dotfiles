@@ -11,3 +11,5 @@
 	name = Hayden Sather
 [user]
 	name = Hayden Sather
+[include]
+	path = ~/.gitconfig.local
