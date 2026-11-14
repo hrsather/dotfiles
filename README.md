@@ -7,9 +7,25 @@
 
 ## Claude skills
 
-AI skills symlinked from an external repo (e.g. `ai-skills`) are gitignored via `claude/.claude/skills/*`. Local skills (checked into this repo) must be explicitly un-ignored in `.gitignore`:
+Skills are Claude Code plugins, never symlinks. Every marketplace and plugin is declared in `claude/.claude/settings.json`, shared by all machines:
+
+| Tier | Marketplace repo | Plugins |
+|---|---|---|
+| Public, generic | [hrsather/ai-skills](https://github.com/hrsather/ai-skills) | `sdlc` (ship workflow + hooks) |
+| Private, personal and side businesses | hrsather/personal-skills | `life` |
+| Work | the work skills repo (to be added) | work plugins |
+
+A machine that can't reach a marketplace (e.g. the personal machine and the work repo) skips it and starts normally (tested with a nonexistent GitHub marketplace), so one settings file serves every machine.
+
+Skills inside plugins answer to their bare names (`ship`) as well as `sdlc:ship`. Leave `version` out of `plugin.json` so every pushed commit counts as an update.
+
+Add a marketplace or plugin by editing `settings.json` and committing it, or with the CLI (which writes to the same stowed file, so commit the result):
 
 ```
-!claude/.claude/skills/<skill-name>
-!claude/.claude/skills/<skill-name>/**
+claude plugin marketplace add <owner>/<repo>
+claude plugin install <plugin>@<marketplace>
 ```
+
+A marketplace repo has `.claude-plugin/marketplace.json` and `plugins/<name>/` with `.claude-plugin/plugin.json`, `skills/<skill>/SKILL.md`, and optionally `hooks/hooks.json` (see ai-skills). Test local edits with `claude --plugin-dir <repo>/plugins/<name>`, then push and run `claude plugin marketplace update <marketplace>`.
+
+Repo-specific skills live in that repo's `.claude/skills/` (e.g. homelab's cluster skills).
