@@ -84,11 +84,9 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # trash-cli
 export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
 
-# Agent skills — AI_SKILLS_DIRS is a comma-separated list of skill source dirs
+# Agent skills — personal skills install as Claude Code plugins (see claude/.claude/settings.json).
+# AI_SKILLS_DIRS is an optional comma-separated list of extra skill source dirs to link.
 mkdir -p ~/.agents/skills
-for _skill in "$HOME/Repos/dotfiles/personal-skills"/*(/N); do
-  ln -sfn "$_skill" ~/.agents/skills/"$(basename "$_skill")"
-done
 _skill_sources="${AI_SKILLS_DIRS:-$AI_SKILLS_DIR}"
 if [[ -n "$_skill_sources" ]]; then
   IFS=',' read -rA _skill_dirs <<< "$_skill_sources"

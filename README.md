@@ -7,9 +7,12 @@
 
 ## Claude skills
 
-AI skills symlinked from an external repo (e.g. `ai-skills`) are gitignored via `claude/.claude/skills/*`. Local skills (checked into this repo) must be explicitly un-ignored in `.gitignore`:
+Skills install as Claude Code plugins, declared in `claude/.claude/settings.json`:
 
-```
-!claude/.claude/skills/<skill-name>
-!claude/.claude/skills/<skill-name>/**
-```
+| Tier | Repo | Plugins |
+|---|---|---|
+| Public, generic | [hrsather/ai-skills](https://github.com/hrsather/ai-skills) | `sdlc` (ship workflow + hooks) |
+| Private, personal and side businesses | hrsather/personal-skills | `life` |
+| Work | `~/Repos/dotfiles-axon` (only on the work machine) | linked by `scripts/update.sh` |
+
+Repo-specific skills live in that repo's `.claude/skills/` (e.g. homelab's cluster skills).
