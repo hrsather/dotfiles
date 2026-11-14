@@ -58,12 +58,6 @@ for package in "${packages[@]}"; do
     stow --dir="$DOTFILES_DIR" --target="$HOME" --restow "$package"
 done
 
-for skill in "$HOME/Repos/dotfiles-axon/skills"/*/; do
-    [ -d "$skill" ] || continue
-    ln -sfn "$skill" "$HOME/.agents/skills/$(basename "$skill")"
-done
-ln -sfn "$HOME/.agents/skills" "$HOME/.claude/skills"
-
 # Fix lazygit install location (Library path has spaces, can't use stow)
 mkdir -p "${HOME}/Library/Application Support/lazygit/"
 rm -f "${HOME}/Library/Application Support/lazygit/config.yml"
